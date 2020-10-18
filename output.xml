@@ -1,0 +1,2405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.8.3 on darwin)" generated="20201018 19:01:14.266" rpa="false">
+<suite id="s1" name="sendEmailTestSuite" source="/Users/suchita.hotwani/Exercise/Fsecure_Test_Assignment/Test/sendEmailTestSuite.robot">
+<test id="s1-t1" name="TC:1 Send Email From One User To Another">
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${SENDER_PASSWORD}</arg>
+</arguments>
+<assign>
+<var>${senderPassword}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:14.725" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:19.171" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:14.724" endtime="20201018 19:01:19.171"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.171" level="INFO">${senderPassword} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:14.723" endtime="20201018 19:01:19.171"></status>
+</kw>
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${CLIENT_SECRET}</arg>
+</arguments>
+<assign>
+<var>${clientSecret}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.173" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:19.174" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:19.173" endtime="20201018 19:01:19.174"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.175" level="INFO">${clientSecret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:19.172" endtime="20201018 19:01:19.175"></status>
+</kw>
+<kw name="Update Variable in Test Data Dictionary" library="sendEmail">
+<arguments>
+<arg>${MESSAGE_WITHOUT_ATTACHMENT.message.toRecipients[0].emailAddress.address}</arg>
+<arg>${RECEIVER_EMAIL_ADDRESS}</arg>
+</arguments>
+<assign>
+<var>${MESSAGE_WITHOUT_ATTACHMENT.message.toRecipients[0].emailAddress.address}</var>
+</assign>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${variableName}</arg>
+<arg>${value}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:19.177" level="INFO">${receiverEmail} = Maria@automationwork.onmicrosoft.com</msg>
+<status status="PASS" starttime="20201018 19:01:19.176" endtime="20201018 19:01:19.177"></status>
+</kw>
+<kw name="Replace Variables" library="BuiltIn">
+<doc>Replaces variables in the given text with their current values.</doc>
+<arguments>
+<arg>${variableName}</arg>
+</arguments>
+<assign>
+<var>${variableName}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.178" level="INFO">${variableName} = Maria@automationwork.onmicrosoft.com</msg>
+<status status="PASS" starttime="20201018 19:01:19.177" endtime="20201018 19:01:19.178"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.178" level="INFO">${MESSAGE_WITHOUT_ATTACHMENT.message.toRecipients[0].emailAddress.address} = Maria@automationwork.onmicrosoft.com</msg>
+<status status="PASS" starttime="20201018 19:01:19.175" endtime="20201018 19:01:19.178"></status>
+</kw>
+<kw name="Convert Robot Dictionary To Json" library="sendEmail">
+<arguments>
+<arg>${MESSAGE_WITHOUT_ATTACHMENT}</arg>
+</arguments>
+<assign>
+<var>${fileContents}</var>
+</assign>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.dumps(${dict})</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${Contents}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.181" level="INFO">${Contents} = {"message": {"subject": "Test Message Without Attachment", "body": {"contentType": "html", "content": "Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;"}, "toRecipients": [{"...</msg>
+<status status="PASS" starttime="20201018 19:01:19.179" endtime="20201018 19:01:19.181"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.181" level="INFO">${fileContents} = {"message": {"subject": "Test Message Without Attachment", "body": {"contentType": "html", "content": "Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;"}, "toRecipients": [{"...</msg>
+<status status="PASS" starttime="20201018 19:01:19.179" endtime="20201018 19:01:19.182"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>client_id=${CLIENT_ID}</arg>
+<arg>client_secret=${clientSecret}</arg>
+<arg>grant_type=password</arg>
+<arg>scope=user.read mail.read mail.send</arg>
+<arg>userName=${SENDER_EMAIL_ADDRESS}</arg>
+<arg>password=${senderPassword}</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.183" level="INFO">${params} = {'client_id': 'f8134a1b-0a12-4ee0-b91e-26fab8ce8080', 'client_secret': '***', 'grant_type': 'password', 'scope': 'user.read mail.read mail.send', 'userName': 'Suchita@au...</msg>
+<status status="PASS" starttime="20201018 19:01:19.182" endtime="20201018 19:01:19.183"></status>
+</kw>
+<kw name="Send Email From One User To Another" library="sendEmail">
+<arguments>
+<arg>${BASE_URL}</arg>
+<arg>${TOKEN_API}</arg>
+<arg>${GRAPH_BASE_URL}</arg>
+<arg>${SEND_MAIL_API}</arg>
+<arg>${fileContents}</arg>
+<arg>${params}</arg>
+</arguments>
+<kw name="Get Access Token" library="common">
+<arguments>
+<arg>${url}</arg>
+<arg>${tokenAPI}</arg>
+<arg>${params}</arg>
+</arguments>
+<assign>
+<var>${access_token}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.186" level="INFO">${header} = {'Content-Type': 'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" starttime="20201018 19:01:19.185" endtime="20201018 19:01:19.186"></status>
+</kw>
+<kw name="Post API Request" library="common">
+<arguments>
+<arg>${url}</arg>
+<arg>${tokenAPI}</arg>
+<arg>${params}</arg>
+<arg>${header}</arg>
+</arguments>
+<assign>
+<var>${responseTokenAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:19.188" level="INFO">Creating Session using : alias=APISession, url=https://login.microsoftonline.com/, headers={'Content-Type': 'application/x-www-form-urlencoded'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:19.187" endtime="20201018 19:01:19.188"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>data=${updatedata}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.861" level="INFO">POST Request : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ path_url=//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '224'} 
+ body=client_id=f8134a1b-0a12-4ee0-b91e-26fab8ce8080&amp;client_secret=***&amp;grant_type=password&amp;scope=user.read+mail.read+mail.send&amp;userName=Suchita%40automationwork.onmicrosoft.com&amp;password=Fsecure%40123 
+ </msg>
+<msg timestamp="20201018 19:01:19.861" level="INFO">POST Response : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ status=200, reason=OK 
+ body={"token_type":"Bearer","scope":"Mail.Read Mail.ReadWrite Mail.Send openid User.Read profile email","expires_in":3599,"ext_expires_in":3599,"access_token":"eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTc5LCJuYmYiOjE2MDMwMzY1NzksImV4cCI6MTYwMzA0MDQ3OSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZQ2o3L2ZKMHNzSk0xZmE1Szd4THlwUlhQRCtSc0xjeTZhRXRuMWlSVE5YcW9vY0EiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiSG90d2FuaSIsImdpdmVuX25hbWUiOiJTdWNoaXRhIiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiOTEuMTUyLjE3OC4yMCIsIm5hbWUiOiJTdWNoaXRhIiwib2lkIjoiZDBmY2NmYzEtNGEwZS00OTFhLWJjYzEtMjk1MzU4NTEwMDQ1IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0FEMjJDIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFNTS4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIG9wZW5pZCBVc2VyLlJlYWQgcHJvZmlsZSBlbWFpbCIsInN1YiI6IkZkZGQ4OTdoVUQ5WWhPWFVta283Z09xV1M5UTk1R210T0JZWEV1bjhDUWciLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6IlN1Y2hpdGFAYXV0b21hdGlvbndvcmsub25taWNyb3NvZnQuY29tIiwidXBuIjoiU3VjaGl0YUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJ6bGtGYzMzcEhFU2tfMTVpd2t0WkFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6InoyWFFQSFdZV3Yya3daT1ZqNS0wYlR0UzZDeXcwOUNCaEw3T2Z0SEFYeEUifSwieG1zX3RjZHQiOjE2MDIxNDM1NDl9.npAPDiEaMc5zRaIFeLFCfonPkKwaDNzbxR7v2CFYQk9Ey5qDhpX5fMJV5eq5J6npIvRTa3aFJ4VNQP0ksFM91bYXm5s4AXE47bXTDDZKrG3BKa7dICE5etnGA-97aNGBK-Y0MJpKMV6ckW8kqAcbF8ioDz8W3I26HhvEKUwUl2cMwX1gQ0gaEQ4DsKhRrKRJtlSmz3yYhdIKsNGfIcKXhWY1jGaYeCH2Yh6nOzcsbPH_Y2N9OjZUlZ4cqdyxnhsj9_En2IMtH0YqrG5GoiokSy4P6-5Gwt8aN5yfUmJsAtreLAYWeHxDI4cm-la8bKV_SYMVuIEcq_ID4xorKKhuuA"} 
+ </msg>
+<msg timestamp="20201018 19:01:19.861" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'login.microsoftonline.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:19.862" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:19.188" endtime="20201018 19:01:19.862"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' != '${EMPTY}'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE IF</arg>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' == '${EMPTY}'</arg>
+<arg>Set Variable</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.864" level="INFO">${python_dict} = {'token_type': 'Bearer', 'scope': 'Mail.Read Mail.ReadWrite Mail.Send openid User.Read profile email', 'expires_in': 3599, 'ext_expires_in': 3599, 'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRy...</msg>
+<status status="PASS" starttime="20201018 19:01:19.864" endtime="20201018 19:01:19.864"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.865" level="INFO">@{keys} = [ access_token | expires_in | ext_expires_in | scope | token_type ]</msg>
+<status status="PASS" starttime="20201018 19:01:19.865" endtime="20201018 19:01:19.865"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.866" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:19.865" endtime="20201018 19:01:19.866"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = access_token" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:19.866" endtime="20201018 19:01:19.867"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.866" endtime="20201018 19:01:19.867"></status>
+</kw>
+<kw name="${key} = expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:19.867" endtime="20201018 19:01:19.868"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.867" endtime="20201018 19:01:19.868"></status>
+</kw>
+<kw name="${key} = ext_expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:19.868" endtime="20201018 19:01:19.869"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.868" endtime="20201018 19:01:19.869"></status>
+</kw>
+<kw name="${key} = scope" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:19.869" endtime="20201018 19:01:19.869"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.869" endtime="20201018 19:01:19.869"></status>
+</kw>
+<kw name="${key} = token_type" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:19.870" endtime="20201018 19:01:19.870"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.869" endtime="20201018 19:01:19.870"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.866" endtime="20201018 19:01:19.870"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.863" endtime="20201018 19:01:19.870"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.870" level="INFO">${robotDictionary} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:19.862" endtime="20201018 19:01:19.870"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.871" level="INFO">${responseTokenAPI} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:19.186" endtime="20201018 19:01:19.871"></status>
+</kw>
+<msg timestamp="20201018 19:01:19.871" level="INFO">${access_token} = eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4z...</msg>
+<status status="PASS" starttime="20201018 19:01:19.184" endtime="20201018 19:01:19.871"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${access_token}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:19.872" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKS...</msg>
+<status status="PASS" starttime="20201018 19:01:19.871" endtime="20201018 19:01:19.872"></status>
+</kw>
+<kw name="Post API Request" library="common">
+<arguments>
+<arg>${graphURL}</arg>
+<arg>${sendMailAPI}</arg>
+<arg>${fileContents}</arg>
+<arg>${header}</arg>
+</arguments>
+<assign>
+<var>${responseSendMailAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:19.873" level="INFO">Creating Session using : alias=APISession, url=https://graph.microsoft.com/, headers={'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTc5LCJuYmYiOjE2MDMwMzY1NzksImV4cCI6MTYwMzA0MDQ3OSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZQ2o3L2ZKMHNzSk0xZmE1Szd4THlwUlhQRCtSc0xjeTZhRXRuMWlSVE5YcW9vY0EiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiSG90d2FuaSIsImdpdmVuX25hbWUiOiJTdWNoaXRhIiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiOTEuMTUyLjE3OC4yMCIsIm5hbWUiOiJTdWNoaXRhIiwib2lkIjoiZDBmY2NmYzEtNGEwZS00OTFhLWJjYzEtMjk1MzU4NTEwMDQ1IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0FEMjJDIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFNTS4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIG9wZW5pZCBVc2VyLlJlYWQgcHJvZmlsZSBlbWFpbCIsInN1YiI6IkZkZGQ4OTdoVUQ5WWhPWFVta283Z09xV1M5UTk1R210T0JZWEV1bjhDUWciLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6IlN1Y2hpdGFAYXV0b21hdGlvbndvcmsub25taWNyb3NvZnQuY29tIiwidXBuIjoiU3VjaGl0YUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJ6bGtGYzMzcEhFU2tfMTVpd2t0WkFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6InoyWFFQSFdZV3Yya3daT1ZqNS0wYlR0UzZDeXcwOUNCaEw3T2Z0SEFYeEUifSwieG1zX3RjZHQiOjE2MDIxNDM1NDl9.npAPDiEaMc5zRaIFeLFCfonPkKwaDNzbxR7v2CFYQk9Ey5qDhpX5fMJV5eq5J6npIvRTa3aFJ4VNQP0ksFM91bYXm5s4AXE47bXTDDZKrG3BKa7dICE5etnGA-97aNGBK-Y0MJpKMV6ckW8kqAcbF8ioDz8W3I26HhvEKUwUl2cMwX1gQ0gaEQ4DsKhRrKRJtlSmz3yYhdIKsNGfIcKXhWY1jGaYeCH2Yh6nOzcsbPH_Y2N9OjZUlZ4cqdyxnhsj9_En2IMtH0YqrG5GoiokSy4P6-5Gwt8aN5yfUmJsAtreLAYWeHxDI4cm-la8bKV_SYMVuIEcq_ID4xorKKhuuA'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:19.872" endtime="20201018 19:01:19.873"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>data=${updatedata}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.265" level="INFO">POST Request : url=https://graph.microsoft.com//v1.0/me/sendMail 
+ path_url=//v1.0/me/sendMail 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpVSTRyTE9Rbnd6TVA3bGF3M2F5cXptYV94N2VIdjY2c3NjbjBkeDFob0EiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTc5LCJuYmYiOjE2MDMwMzY1NzksImV4cCI6MTYwMzA0MDQ3OSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZQ2o3L2ZKMHNzSk0xZmE1Szd4THlwUlhQRCtSc0xjeTZhRXRuMWlSVE5YcW9vY0EiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiSG90d2FuaSIsImdpdmVuX25hbWUiOiJTdWNoaXRhIiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiOTEuMTUyLjE3OC4yMCIsIm5hbWUiOiJTdWNoaXRhIiwib2lkIjoiZDBmY2NmYzEtNGEwZS00OTFhLWJjYzEtMjk1MzU4NTEwMDQ1IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0FEMjJDIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFNTS4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIG9wZW5pZCBVc2VyLlJlYWQgcHJvZmlsZSBlbWFpbCIsInN1YiI6IkZkZGQ4OTdoVUQ5WWhPWFVta283Z09xV1M5UTk1R210T0JZWEV1bjhDUWciLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6IlN1Y2hpdGFAYXV0b21hdGlvbndvcmsub25taWNyb3NvZnQuY29tIiwidXBuIjoiU3VjaGl0YUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJ6bGtGYzMzcEhFU2tfMTVpd2t0WkFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6InoyWFFQSFdZV3Yya3daT1ZqNS0wYlR0UzZDeXcwOUNCaEw3T2Z0SEFYeEUifSwieG1zX3RjZHQiOjE2MDIxNDM1NDl9.npAPDiEaMc5zRaIFeLFCfonPkKwaDNzbxR7v2CFYQk9Ey5qDhpX5fMJV5eq5J6npIvRTa3aFJ4VNQP0ksFM91bYXm5s4AXE47bXTDDZKrG3BKa7dICE5etnGA-97aNGBK-Y0MJpKMV6ckW8kqAcbF8ioDz8W3I26HhvEKUwUl2cMwX1gQ0gaEQ4DsKhRrKRJtlSmz3yYhdIKsNGfIcKXhWY1jGaYeCH2Yh6nOzcsbPH_Y2N9OjZUlZ4cqdyxnhsj9_En2IMtH0YqrG5GoiokSy4P6-5Gwt8aN5yfUmJsAtreLAYWeHxDI4cm-la8bKV_SYMVuIEcq_ID4xorKKhuuA', 'Content-Length': '270'} 
+ body=b'{"message": {"subject": "Test Message Without Attachment", "body": {"contentType": "html", "content": "Hi, Here is &lt;a href=\\"https://robotframework.org/\\"&gt;Test URL embedded &lt;/a&gt;"}, "toRecipients": [{"emailAddress": {"address": "Maria@automationwork.onmicrosoft.com"}}]}}' 
+ </msg>
+<msg timestamp="20201018 19:01:20.266" level="INFO">POST Response : url=https://graph.microsoft.com//v1.0/me/sendMail 
+ status=202, reason=Accepted 
+ body=None 
+ </msg>
+<msg timestamp="20201018 19:01:20.266" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'graph.microsoft.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:20.266" level="INFO">${response} = &lt;Response [202]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:19.873" endtime="20201018 19:01:20.266"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' != '${EMPTY}'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE IF</arg>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' == '${EMPTY}'</arg>
+<arg>Set Variable</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.268" endtime="20201018 19:01:20.269"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.269" level="INFO">${robotDictionary} = </msg>
+<status status="PASS" starttime="20201018 19:01:20.267" endtime="20201018 19:01:20.269"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.270" level="INFO">${responseSendMailAPI} = </msg>
+<status status="PASS" starttime="20201018 19:01:19.872" endtime="20201018 19:01:20.270"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:19.183" endtime="20201018 19:01:20.270"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:14.722" endtime="20201018 19:01:20.270" critical="yes"></status>
+</test>
+<test id="s1-t2" name="TC:2 Verify From Recipient Mailbox That Email Subject And Body Matches">
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${CLIENT_SECRET}</arg>
+</arguments>
+<assign>
+<var>${clientSecret}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.272" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:20.272" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.272" endtime="20201018 19:01:20.273"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.273" level="INFO">${clientSecret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.271" endtime="20201018 19:01:20.273"></status>
+</kw>
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${RECEIVER_PASSWORD}</arg>
+</arguments>
+<assign>
+<var>${receiverPassword}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.274" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:20.275" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.274" endtime="20201018 19:01:20.275"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.275" level="INFO">${receiverPassword} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.274" endtime="20201018 19:01:20.275"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>client_id=${CLIENT_ID}</arg>
+<arg>client_secret=${clientSecret}</arg>
+<arg>grant_type=password</arg>
+<arg>scope=user.read mail.read mail.send</arg>
+<arg>userName=${RECEIVER_EMAIL_ADDRESS}</arg>
+<arg>password=${receiverPassword}</arg>
+</arguments>
+<assign>
+<var>${paramsTokenAPI}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.276" level="INFO">${paramsTokenAPI} = {'client_id': 'f8134a1b-0a12-4ee0-b91e-26fab8ce8080', 'client_secret': '***', 'grant_type': 'password', 'scope': 'user.read mail.read mail.send', 'userName': 'Maria@auto...</msg>
+<status status="PASS" starttime="20201018 19:01:20.276" endtime="20201018 19:01:20.276"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>$filter=from/emailAddress/address eq '${SENDER_EMAIL_ADDRESS}' and isRead eq false</arg>
+<arg>$count=true</arg>
+</arguments>
+<assign>
+<var>${paramsReadMailAPI}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.277" level="INFO">${paramsReadMailAPI} = {'$filter': "from/emailAddress/address eq 'Suchita@automationwork.onmicrosoft.com' and isRead eq false", '$count': 'true'}</msg>
+<status status="PASS" starttime="20201018 19:01:20.277" endtime="20201018 19:01:20.277"></status>
+</kw>
+<kw name="Get Access Token" library="common">
+<arguments>
+<arg>${BASE_URL}</arg>
+<arg>${TOKEN_API}</arg>
+<arg>${paramsTokenAPI}</arg>
+</arguments>
+<assign>
+<var>${access_token}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.278" level="INFO">${header} = {'Content-Type': 'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" starttime="20201018 19:01:20.278" endtime="20201018 19:01:20.278"></status>
+</kw>
+<kw name="Post API Request" library="common">
+<arguments>
+<arg>${url}</arg>
+<arg>${tokenAPI}</arg>
+<arg>${params}</arg>
+<arg>${header}</arg>
+</arguments>
+<assign>
+<var>${responseTokenAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:20.279" level="INFO">Creating Session using : alias=APISession, url=https://login.microsoftonline.com/, headers={'Content-Type': 'application/x-www-form-urlencoded'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:20.279" endtime="20201018 19:01:20.280"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>data=${updatedata}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.607" level="INFO">POST Request : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ path_url=//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '222'} 
+ body=client_id=f8134a1b-0a12-4ee0-b91e-26fab8ce8080&amp;client_secret=***&amp;grant_type=password&amp;scope=user.read+mail.read+mail.send&amp;userName=Maria%40automationwork.onmicrosoft.com&amp;password=Fsecure%40123 
+ </msg>
+<msg timestamp="20201018 19:01:20.608" level="INFO">POST Response : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ status=200, reason=OK 
+ body={"token_type":"Bearer","scope":"Mail.Read Mail.ReadWrite Mail.Send User.Read profile openid email","expires_in":3599,"ext_expires_in":3599,"access_token":"eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgwLCJuYmYiOjE2MDMwMzY1ODAsImV4cCI6MTYwMzA0MDQ4MCwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhSQUFBQTNGRUZRS01ucHB5b1Q2RzhBbGdhdFpNYmowM2hhMkFBbGIrZGhjQURvWWs9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJhcHBfd2ViIiwiYXBwaWQiOiJmODEzNGExYi0wYTEyLTRlZTAtYjkxZS0yNmZhYjhjZTgwODAiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkthcHBpIiwiZ2l2ZW5fbmFtZSI6Ik1hcmlhIiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiOTEuMTUyLjE3OC4yMCIsIm5hbWUiOiJNYXJpYSIsIm9pZCI6IjA4ZDFmMmQwLTA4NzYtNDRlNC04Y2VmLTkyN2QwNDA2MTliOCIsInBsYXRmIjoiMTQiLCJwdWlkIjoiMTAwMzIwMDBFQjdCNzQzMyIsInJoIjoiMC5BQUFBaEE0a2JnamRTMHFwY0ZPZkRfaHAtUnRLRV9nU0N1Qk91UjRtLXJqT2dJQnpBSDAuIiwic2NwIjoiTWFpbC5SZWFkIE1haWwuUmVhZFdyaXRlIE1haWwuU2VuZCBVc2VyLlJlYWQgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiJmSjl2djNyTHZkODNoQy1OeHVJS3FBaFhIRFduOUdIREl4UExndVp1ZnJjIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiNmUyNDBlODQtZGQwOC00YTRiLWE5NzAtNTM5ZjBmZjg2OWY5IiwidW5pcXVlX25hbWUiOiJNYXJpYUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJNYXJpYUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJDQTNrTkFvS2RFQ3l0TlFYSWRkNUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6IkZTcVpvWGF3c01QSmVpZnl5eGJ3eE1JTW0wVi1RS1VUZFRqTk04em9ZdzgifSwieG1zX3RjZHQiOjE2MDIxNDM1NDl9.DnAhf9eRlJmrMqckRjlyzgGE77EiYufdUUvIbJlrAErE9znpkYLxmrb5zbpBZ6EpsehSsUTVj2Y9rGgcDKz17--7AOo_1J8ud9jHcRv2iEv8F_VGJ9zYvmPXZKNjByWdE3WmEj94xoIdx-vHVlMz1OPnOXOcNOWLs5sCKBWIEACKyglrovq9C_jUImdEAf9pXKiAkueGucnszoapdCvWxXs5igrFEod8NJ0lnwLnhwFVzo64xo4z5lu5EYtEgiTv6RMbGuydehTiHczDxByxhq0r3RILsOxQqeq9pjlVVGm3v4kuf-_LM0ssxLXkQtD0TxvXm6Gt8aJLZwEFXZRQQA"} 
+ </msg>
+<msg timestamp="20201018 19:01:20.608" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'login.microsoftonline.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:20.608" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:20.280" endtime="20201018 19:01:20.608"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' != '${EMPTY}'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE IF</arg>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' == '${EMPTY}'</arg>
+<arg>Set Variable</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.612" level="INFO">${python_dict} = {'token_type': 'Bearer', 'scope': 'Mail.Read Mail.ReadWrite Mail.Send User.Read profile openid email', 'expires_in': 3599, 'ext_expires_in': 3599, 'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1...</msg>
+<status status="PASS" starttime="20201018 19:01:20.611" endtime="20201018 19:01:20.612"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.612" level="INFO">@{keys} = [ access_token | expires_in | ext_expires_in | scope | token_type ]</msg>
+<status status="PASS" starttime="20201018 19:01:20.612" endtime="20201018 19:01:20.612"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.613" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:20.612" endtime="20201018 19:01:20.613"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = access_token" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.613" endtime="20201018 19:01:20.614"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.613" endtime="20201018 19:01:20.614"></status>
+</kw>
+<kw name="${key} = expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.614" endtime="20201018 19:01:20.615"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.614" endtime="20201018 19:01:20.615"></status>
+</kw>
+<kw name="${key} = ext_expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.615" endtime="20201018 19:01:20.616"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.615" endtime="20201018 19:01:20.616"></status>
+</kw>
+<kw name="${key} = scope" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.616" endtime="20201018 19:01:20.616"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.616" endtime="20201018 19:01:20.616"></status>
+</kw>
+<kw name="${key} = token_type" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.617" endtime="20201018 19:01:20.617"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.617" endtime="20201018 19:01:20.617"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.613" endtime="20201018 19:01:20.617"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.610" endtime="20201018 19:01:20.618"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.618" level="INFO">${robotDictionary} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:20.609" endtime="20201018 19:01:20.618"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.618" level="INFO">${responseTokenAPI} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:20.278" endtime="20201018 19:01:20.618"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.619" level="INFO">${access_token} = eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4z...</msg>
+<status status="PASS" starttime="20201018 19:01:20.277" endtime="20201018 19:01:20.619"></status>
+</kw>
+<kw name="Read Email From MailBox" library="sendEmail">
+<arguments>
+<arg>${GRAPH_BASE_URL}</arg>
+<arg>${READ_MAIL_API}</arg>
+<arg>${paramsReadMailAPI}</arg>
+<arg>${access_token}</arg>
+</arguments>
+<assign>
+<var>${responseReadMailAPI}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${access_token}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.620" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKS...</msg>
+<status status="PASS" starttime="20201018 19:01:20.619" endtime="20201018 19:01:20.620"></status>
+</kw>
+<kw name="Get API Request" library="common">
+<arguments>
+<arg>${graphURL}</arg>
+<arg>${readMailAPI}</arg>
+<arg>${header}</arg>
+<arg>${paramsReadMailAPI}</arg>
+</arguments>
+<assign>
+<var>${responseReadMailAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:20.621" level="INFO">Creating Session using : alias=APISession, url=https://graph.microsoft.com/, headers={'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgwLCJuYmYiOjE2MDMwMzY1ODAsImV4cCI6MTYwMzA0MDQ4MCwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhSQUFBQTNGRUZRS01ucHB5b1Q2RzhBbGdhdFpNYmowM2hhMkFBbGIrZGhjQURvWWs9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJhcHBfd2ViIiwiYXBwaWQiOiJmODEzNGExYi0wYTEyLTRlZTAtYjkxZS0yNmZhYjhjZTgwODAiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkthcHBpIiwiZ2l2ZW5fbmFtZSI6Ik1hcmlhIiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiOTEuMTUyLjE3OC4yMCIsIm5hbWUiOiJNYXJpYSIsIm9pZCI6IjA4ZDFmMmQwLTA4NzYtNDRlNC04Y2VmLTkyN2QwNDA2MTliOCIsInBsYXRmIjoiMTQiLCJwdWlkIjoiMTAwMzIwMDBFQjdCNzQzMyIsInJoIjoiMC5BQUFBaEE0a2JnamRTMHFwY0ZPZkRfaHAtUnRLRV9nU0N1Qk91UjRtLXJqT2dJQnpBSDAuIiwic2NwIjoiTWFpbC5SZWFkIE1haWwuUmVhZFdyaXRlIE1haWwuU2VuZCBVc2VyLlJlYWQgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiJmSjl2djNyTHZkODNoQy1OeHVJS3FBaFhIRFduOUdIREl4UExndVp1ZnJjIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiNmUyNDBlODQtZGQwOC00YTRiLWE5NzAtNTM5ZjBmZjg2OWY5IiwidW5pcXVlX25hbWUiOiJNYXJpYUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJNYXJpYUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJDQTNrTkFvS2RFQ3l0TlFYSWRkNUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6IkZTcVpvWGF3c01QSmVpZnl5eGJ3eE1JTW0wVi1RS1VUZFRqTk04em9ZdzgifSwieG1zX3RjZHQiOjE2MDIxNDM1NDl9.DnAhf9eRlJmrMqckRjlyzgGE77EiYufdUUvIbJlrAErE9znpkYLxmrb5zbpBZ6EpsehSsUTVj2Y9rGgcDKz17--7AOo_1J8ud9jHcRv2iEv8F_VGJ9zYvmPXZKNjByWdE3WmEj94xoIdx-vHVlMz1OPnOXOcNOWLs5sCKBWIEACKyglrovq9C_jUImdEAf9pXKiAkueGucnszoapdCvWxXs5igrFEod8NJ0lnwLnhwFVzo64xo4z5lu5EYtEgiTv6RMbGuydehTiHczDxByxhq0r3RILsOxQqeq9pjlVVGm3v4kuf-_LM0ssxLXkQtD0TxvXm6Gt8aJLZwEFXZRQQA'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:20.620" endtime="20201018 19:01:20.621"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>params=${params}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.888" level="INFO">GET Request : url=https://graph.microsoft.com//v1.0/me/mailFolders/Inbox/messages?%24filter=from%2FemailAddress%2Faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;%24count=true 
+ path_url=//v1.0/me/mailFolders/Inbox/messages?%24filter=from%2FemailAddress%2Faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;%24count=true 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6IlNvQWQ1dkxzVjZKcUZoNW1kc1ZlRml0YXNFSHF2b2EtUW5UOVAwSDRRODQiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgwLCJuYmYiOjE2MDMwMzY1ODAsImV4cCI6MTYwMzA0MDQ4MCwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhSQUFBQTNGRUZRS01ucHB5b1Q2RzhBbGdhdFpNYmowM2hhMkFBbGIrZGhjQURvWWs9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJhcHBfd2ViIiwiYXBwaWQiOiJmODEzNGExYi0wYTEyLTRlZTAtYjkxZS0yNmZhYjhjZTgwODAiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkthcHBpIiwiZ2l2ZW5fbmFtZSI6Ik1hcmlhIiwiaWR0eXAiOiJ1c2VyIiwiaXBhZGRyIjoiOTEuMTUyLjE3OC4yMCIsIm5hbWUiOiJNYXJpYSIsIm9pZCI6IjA4ZDFmMmQwLTA4NzYtNDRlNC04Y2VmLTkyN2QwNDA2MTliOCIsInBsYXRmIjoiMTQiLCJwdWlkIjoiMTAwMzIwMDBFQjdCNzQzMyIsInJoIjoiMC5BQUFBaEE0a2JnamRTMHFwY0ZPZkRfaHAtUnRLRV9nU0N1Qk91UjRtLXJqT2dJQnpBSDAuIiwic2NwIjoiTWFpbC5SZWFkIE1haWwuUmVhZFdyaXRlIE1haWwuU2VuZCBVc2VyLlJlYWQgcHJvZmlsZSBvcGVuaWQgZW1haWwiLCJzdWIiOiJmSjl2djNyTHZkODNoQy1OeHVJS3FBaFhIRFduOUdIREl4UExndVp1ZnJjIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiNmUyNDBlODQtZGQwOC00YTRiLWE5NzAtNTM5ZjBmZjg2OWY5IiwidW5pcXVlX25hbWUiOiJNYXJpYUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJNYXJpYUBhdXRvbWF0aW9ud29yay5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJDQTNrTkFvS2RFQ3l0TlFYSWRkNUFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX3N0Ijp7InN1YiI6IkZTcVpvWGF3c01QSmVpZnl5eGJ3eE1JTW0wVi1RS1VUZFRqTk04em9ZdzgifSwieG1zX3RjZHQiOjE2MDIxNDM1NDl9.DnAhf9eRlJmrMqckRjlyzgGE77EiYufdUUvIbJlrAErE9znpkYLxmrb5zbpBZ6EpsehSsUTVj2Y9rGgcDKz17--7AOo_1J8ud9jHcRv2iEv8F_VGJ9zYvmPXZKNjByWdE3WmEj94xoIdx-vHVlMz1OPnOXOcNOWLs5sCKBWIEACKyglrovq9C_jUImdEAf9pXKiAkueGucnszoapdCvWxXs5igrFEod8NJ0lnwLnhwFVzo64xo4z5lu5EYtEgiTv6RMbGuydehTiHczDxByxhq0r3RILsOxQqeq9pjlVVGm3v4kuf-_LM0ssxLXkQtD0TxvXm6Gt8aJLZwEFXZRQQA'} 
+ body=None 
+ </msg>
+<msg timestamp="20201018 19:01:20.888" level="INFO">GET Response : url=https://graph.microsoft.com//v1.0/me/mailFolders/Inbox/messages?%24filter=from%2FemailAddress%2Faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;%24count=true 
+ status=200, reason=OK 
+ body={"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages","@odata.count":8,"value":[{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG1\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq3AAA=","createdDateTime":"2020-10-18T15:47:59Z","lastModifiedDateTime":"2020-10-18T15:48:01Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG1","categories":[],"receivedDateTime":"2020-10-18T15:47:59Z","sentDateTime":"2020-10-18T15:47:59Z","hasAttachments":false,"internetMessageId":"&lt;AM8P195MB0946D6833EC1D38F3017470A81010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message Without Attachment","bodyPreview":"Hi, Here is Test URL embedded","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAGkOsMABqnNAsND9si_ZI5c=","conversationIndex":"AQHWpWYNaQ6wwAGqc0Cw0P2yL5kjlw==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq3AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"html","content":"&lt;html&gt;&lt;head&gt;\r\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"&gt;&lt;meta content=\"text/html; charset=us-ascii\"&gt;&lt;/head&gt;&lt;body&gt;Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG3\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA=","createdDateTime":"2020-10-18T15:48:01Z","lastModifiedDateTime":"2020-10-18T15:48:02Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG3","categories":[],"receivedDateTime":"2020-10-18T15:48:01Z","sentDateTime":"2020-10-18T15:48:00Z","hasAttachments":true,"internetMessageId":"&lt;AM8P195MB09467169396F05C750AD3F4181010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message With Attachment","bodyPreview":"Please find attached files","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAIf3bPHIEr5LoubA9g_Dw_g=","conversationIndex":"AQHWpWYOh/ds8cgSvkui5sD2D4PD6A==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"text","content":"Please find attached files"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHS\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq5AAA=","createdDateTime":"2020-10-18T15:50:53Z","lastModifiedDateTime":"2020-10-18T15:50:54Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHS","categories":[],"receivedDateTime":"2020-10-18T15:50:54Z","sentDateTime":"2020-10-18T15:50:52Z","hasAttachments":false,"internetMessageId":"&lt;AM8P195MB09461CD341BA6529ACD3341881010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message Without Attachment","bodyPreview":"Hi, Here is Test URL embedded","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAOcYqO3bxMJIpLW1FAXVrXI=","conversationIndex":"AQHWpWZ15xio7dvEwkiktbUUBdWtcg==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq5AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"html","content":"&lt;html&gt;&lt;head&gt;\r\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"&gt;&lt;meta content=\"text/html; charset=us-ascii\"&gt;&lt;/head&gt;&lt;body&gt;Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHX\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq6AAA=","createdDateTime":"2020-10-18T15:50:54Z","lastModifiedDateTime":"2020-10-18T15:50:55Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHX","categories":[],"receivedDateTime":"2020-10-18T15:50:54Z","sentDateTime":"2020-10-18T15:50:54Z","hasAttachments":true,"internetMessageId":"&lt;AM8P195MB09461F51C7217711013CE8C581010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message With Attachment","bodyPreview":"Please find attached files","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQANdcAFhhBblNoxX2KwpcOXY=","conversationIndex":"AQHWpWZ211wAWGEFuU2jFfYrClw5dg==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq6AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"text","content":"Please find attached files"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHk\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq7AAA=","createdDateTime":"2020-10-18T15:51:18Z","lastModifiedDateTime":"2020-10-18T15:51:20Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHk","categories":[],"receivedDateTime":"2020-10-18T15:51:19Z","sentDateTime":"2020-10-18T15:51:18Z","hasAttachments":false,"internetMessageId":"&lt;AM8P195MB0946417E68A2D2E6D6FF241181010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message Without Attachment","bodyPreview":"Hi, Here is Test URL embedded","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAHtUOX4t5TNBhaNnxqwzabM=","conversationIndex":"AQHWpWaEe1Q5fi3lM0GFo2fGrDNpsw==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq7AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"html","content":"&lt;html&gt;&lt;head&gt;\r\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"&gt;&lt;meta content=\"text/html; charset=us-ascii\"&gt;&lt;/head&gt;&lt;body&gt;Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHp\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviX... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20201018 19:01:20.889" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'graph.microsoft.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:20.890" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:20.621" endtime="20201018 19:01:20.890"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' == '200'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.898" level="INFO">${python_dict} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': 8, 'value': [{'@odata.etag': 'W/"CQAAABYAAA...</msg>
+<status status="PASS" starttime="20201018 19:01:20.892" endtime="20201018 19:01:20.898"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.899" level="INFO">@{keys} = [ @odata.context | @odata.count | value ]</msg>
+<status status="PASS" starttime="20201018 19:01:20.898" endtime="20201018 19:01:20.899"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.899" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:20.899" endtime="20201018 19:01:20.899"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = @odata.context" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.900" endtime="20201018 19:01:20.900"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.900" endtime="20201018 19:01:20.900"></status>
+</kw>
+<kw name="${key} = @odata.count" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.900" endtime="20201018 19:01:20.901"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.900" endtime="20201018 19:01:20.901"></status>
+</kw>
+<kw name="${key} = value" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.901" endtime="20201018 19:01:20.901"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.901" endtime="20201018 19:01:20.901"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.899" endtime="20201018 19:01:20.902"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.891" endtime="20201018 19:01:20.902"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.902" level="INFO">${robotDictionary} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': 8, 'value': [{'@odata.etag': 'W/"CQAAABYAAA...</msg>
+<status status="PASS" starttime="20201018 19:01:20.890" endtime="20201018 19:01:20.902"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.902" level="INFO">${responseReadMailAPI} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': 8, 'value': [{'@odata.etag': 'W/"CQAAABYAAA...</msg>
+<status status="PASS" starttime="20201018 19:01:20.620" endtime="20201018 19:01:20.902"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.903" level="INFO">${responseReadMailAPI} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': 8, 'value': [{'@odata.etag': 'W/"CQAAABYAAA...</msg>
+<status status="PASS" starttime="20201018 19:01:20.619" endtime="20201018 19:01:20.903"></status>
+</kw>
+<kw name="Verify Email Body And Subject Are Same As Sent Message" library="sendEmail">
+<arguments>
+<arg>${responseReadMailAPI.value}</arg>
+<arg>${MESSAGE_WITHOUT_ATTACHMENT}</arg>
+</arguments>
+<kw name="${mail} IN [ @{mails} ]" type="for">
+<kw name="${mail} = {'@odata.etag': 'W/&quot;CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG1&quot;', 'id': 'AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ..." type="foritem">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Compare Mail Body And Subject Values</arg>
+<arg>${sentMessage}</arg>
+<arg>${mail}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Compare Mail Body And Subject Values" library="common">
+<arguments>
+<arg>${sentMessage}</arg>
+<arg>${mail}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentMessage}[message][subject]</arg>
+<arg>${mail}[subject]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.905" endtime="20201018 19:01:20.905"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentMessage}[message][body][contentType]</arg>
+<arg>${mail}[body][contentType]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.905" endtime="20201018 19:01:20.905"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${mail}[body][content]</arg>
+<arg>${sentMessage}[message][body][content]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.906" endtime="20201018 19:01:20.906"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.904" endtime="20201018 19:01:20.906"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.908" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:20.904" endtime="20201018 19:01:20.908"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>${found}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:20.910" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20201018 19:01:20.909" endtime="20201018 19:01:20.910"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.904" endtime="20201018 19:01:20.910"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.904" endtime="20201018 19:01:20.910"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${found}' == '${FALSE}'</arg>
+<arg>Fail</arg>
+<arg>Email not found</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:20.910" endtime="20201018 19:01:20.910"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.903" endtime="20201018 19:01:20.911"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.271" endtime="20201018 19:01:20.911" critical="yes"></status>
+</test>
+<test id="s1-t3" name="TC:3 Send Email From One User To Another With File Attachments">
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${SENDER_PASSWORD}</arg>
+</arguments>
+<assign>
+<var>${senderPassword}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.912" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:20.913" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.912" endtime="20201018 19:01:20.913"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.913" level="INFO">${senderPassword} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.912" endtime="20201018 19:01:20.913"></status>
+</kw>
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${CLIENT_SECRET}</arg>
+</arguments>
+<assign>
+<var>${clientSecret}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.914" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:20.914" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.914" endtime="20201018 19:01:20.915"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.915" level="INFO">${clientSecret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:20.913" endtime="20201018 19:01:20.915"></status>
+</kw>
+<kw name="Update Attachment Variable in Test Data Dictionary" library="sendEmail">
+<arguments>
+<arg>${MESSAGE_WITH_ATTACHMENT.message.attachments}</arg>
+</arguments>
+<assign>
+<var>${MESSAGE_WITH_ATTACHMENT.message.attachments}</var>
+</assign>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${TestSuiteLocation}</arg>
+<arg>/Users/suchita.hotwani/Exercise/Fsecure_Test_Assignment/Resource</arg>
+</arguments>
+<msg timestamp="20201018 19:01:20.918" level="INFO">${TestSuiteLocation} = /Users/suchita.hotwani/Exercise/Fsecure_Test_Assignment/Resource</msg>
+<status status="PASS" starttime="20201018 19:01:20.916" endtime="20201018 19:01:20.918"></status>
+</kw>
+<kw name="${attachment} IN [ @{attachments} ]" type="for">
+<kw name="${attachment} = {'@odata.type': '#microsoft.graph.fileAttachment', 'contentBytes': '${content}', 'contentType': 'text/plain', 'name': 'Test.txt', 'contentLocation': '${TestSuiteLocation}/../TestData/Test.txt'}" type="foritem">
+<kw name="Replace Variables" library="BuiltIn">
+<doc>Replaces variables in the given text with their current values.</doc>
+<arguments>
+<arg>${attachment.contentLocation}</arg>
+</arguments>
+<assign>
+<var>${attachment.contentLocation}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.918" level="INFO">${attachment.contentLocation} = /Users/suchita.hotwani/Exercise/Fsecure_Test_Assignment/Resource/../TestData/Test.txt</msg>
+<status status="PASS" starttime="20201018 19:01:20.918" endtime="20201018 19:01:20.919"></status>
+</kw>
+<kw name="Read File Data" library="readFileInBase64">
+<arguments>
+<arg>${attachment.contentLocation}</arg>
+</arguments>
+<assign>
+<var>${content}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.921" level="INFO">${content} = SGF2ZSBhIE5pY2UgRGF5IQ==</msg>
+<status status="PASS" starttime="20201018 19:01:20.919" endtime="20201018 19:01:20.921"></status>
+</kw>
+<kw name="Replace Variables" library="BuiltIn">
+<doc>Replaces variables in the given text with their current values.</doc>
+<arguments>
+<arg>${attachment.contentBytes}</arg>
+</arguments>
+<assign>
+<var>${attachment.contentBytes}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.922" level="INFO">${attachment.contentBytes} = SGF2ZSBhIE5pY2UgRGF5IQ==</msg>
+<status status="PASS" starttime="20201018 19:01:20.921" endtime="20201018 19:01:20.922"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.918" endtime="20201018 19:01:20.922"></status>
+</kw>
+<kw name="${attachment} = {'@odata.type': '#microsoft.graph.fileAttachment', 'contentBytes': '${content}', 'contentType': 'image/jpeg', 'name': 'Cats.jpeg', 'contentLocation': '${TestSuiteLocation}/../TestData/Cats.jpeg'}" type="foritem">
+<kw name="Replace Variables" library="BuiltIn">
+<doc>Replaces variables in the given text with their current values.</doc>
+<arguments>
+<arg>${attachment.contentLocation}</arg>
+</arguments>
+<assign>
+<var>${attachment.contentLocation}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.922" level="INFO">${attachment.contentLocation} = /Users/suchita.hotwani/Exercise/Fsecure_Test_Assignment/Resource/../TestData/Cats.jpeg</msg>
+<status status="PASS" starttime="20201018 19:01:20.922" endtime="20201018 19:01:20.922"></status>
+</kw>
+<kw name="Read File Data" library="readFileInBase64">
+<arguments>
+<arg>${attachment.contentLocation}</arg>
+</arguments>
+<assign>
+<var>${content}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.924" level="INFO">${content} = /9j/4AAQSkZJRgABAQAAZABkAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABkAAAAAQAAAGQAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAfSgAwAE...</msg>
+<status status="PASS" starttime="20201018 19:01:20.922" endtime="20201018 19:01:20.924"></status>
+</kw>
+<kw name="Replace Variables" library="BuiltIn">
+<doc>Replaces variables in the given text with their current values.</doc>
+<arguments>
+<arg>${attachment.contentBytes}</arg>
+</arguments>
+<assign>
+<var>${attachment.contentBytes}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.925" level="INFO">${attachment.contentBytes} = /9j/4AAQSkZJRgABAQAAZABkAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABkAAAAAQAAAGQAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAfSgAwAE...</msg>
+<status status="PASS" starttime="20201018 19:01:20.924" endtime="20201018 19:01:20.925"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.922" endtime="20201018 19:01:20.925"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.918" endtime="20201018 19:01:20.925"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.925" level="INFO">${MESSAGE_WITH_ATTACHMENT.message.attachments} = [{'@odata.type': '#microsoft.graph.fileAttachment', 'contentBytes': 'SGF2ZSBhIE5pY2UgRGF5IQ==', 'contentType': 'text/plain', 'name': 'Test.txt', 'contentLocation': '/Users/suchita.hotwani/Exercise/Fse...</msg>
+<status status="PASS" starttime="20201018 19:01:20.916" endtime="20201018 19:01:20.925"></status>
+</kw>
+<kw name="Update Variable in Test Data Dictionary" library="sendEmail">
+<arguments>
+<arg>${MESSAGE_WITH_ATTACHMENT.message.toRecipients[0].emailAddress.address}</arg>
+<arg>${RECEIVER_EMAIL_ADDRESS}</arg>
+</arguments>
+<assign>
+<var>${MESSAGE_WITH_ATTACHMENT.message.toRecipients[0].emailAddress.address}</var>
+</assign>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${variableName}</arg>
+<arg>${value}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:20.926" level="INFO">${variableName} = Maria@automationwork.onmicrosoft.com</msg>
+<status status="PASS" starttime="20201018 19:01:20.926" endtime="20201018 19:01:20.927"></status>
+</kw>
+<kw name="Replace Variables" library="BuiltIn">
+<doc>Replaces variables in the given text with their current values.</doc>
+<arguments>
+<arg>${variableName}</arg>
+</arguments>
+<assign>
+<var>${variableName}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.927" level="INFO">${variableName} = Maria@automationwork.onmicrosoft.com</msg>
+<status status="PASS" starttime="20201018 19:01:20.927" endtime="20201018 19:01:20.927"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.927" level="INFO">${MESSAGE_WITH_ATTACHMENT.message.toRecipients[0].emailAddress.address} = Maria@automationwork.onmicrosoft.com</msg>
+<status status="PASS" starttime="20201018 19:01:20.926" endtime="20201018 19:01:20.928"></status>
+</kw>
+<kw name="Convert Robot Dictionary To Json" library="sendEmail">
+<arguments>
+<arg>${MESSAGE_WITH_ATTACHMENT}</arg>
+</arguments>
+<assign>
+<var>${fileContents}</var>
+</assign>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.dumps(${dict})</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${Contents}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.929" level="INFO">${Contents} = {"message": {"subject": "Test Message With Attachment", "body": {"contentType": "text", "content": "Please find attached files"}, "toRecipients": [{"emailAddress": {"address": "Maria@automationwork.on...</msg>
+<status status="PASS" starttime="20201018 19:01:20.928" endtime="20201018 19:01:20.929"></status>
+</kw>
+<msg timestamp="20201018 19:01:20.929" level="INFO">${fileContents} = {"message": {"subject": "Test Message With Attachment", "body": {"contentType": "text", "content": "Please find attached files"}, "toRecipients": [{"emailAddress": {"address": "Maria@automationwork.on...</msg>
+<status status="PASS" starttime="20201018 19:01:20.928" endtime="20201018 19:01:20.929"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>client_id=${CLIENT_ID}</arg>
+<arg>client_secret=${clientSecret}</arg>
+<arg>grant_type=password</arg>
+<arg>scope=user.read mail.read mail.send</arg>
+<arg>userName=${SENDER_EMAIL_ADDRESS}</arg>
+<arg>password=${senderPassword}</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.930" level="INFO">${params} = {'client_id': 'f8134a1b-0a12-4ee0-b91e-26fab8ce8080', 'client_secret': '***', 'grant_type': 'password', 'scope': 'user.read mail.read mail.send', 'userName': 'Suchita@au...</msg>
+<status status="PASS" starttime="20201018 19:01:20.929" endtime="20201018 19:01:20.930"></status>
+</kw>
+<kw name="Send Email From One User To Another" library="sendEmail">
+<arguments>
+<arg>${BASE_URL}</arg>
+<arg>${TOKEN_API}</arg>
+<arg>${GRAPH_BASE_URL}</arg>
+<arg>${SEND_MAIL_API}</arg>
+<arg>${fileContents}</arg>
+<arg>${params}</arg>
+</arguments>
+<kw name="Get Access Token" library="common">
+<arguments>
+<arg>${url}</arg>
+<arg>${tokenAPI}</arg>
+<arg>${params}</arg>
+</arguments>
+<assign>
+<var>${access_token}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:20.935" level="INFO">${header} = {'Content-Type': 'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" starttime="20201018 19:01:20.934" endtime="20201018 19:01:20.935"></status>
+</kw>
+<kw name="Post API Request" library="common">
+<arguments>
+<arg>${url}</arg>
+<arg>${tokenAPI}</arg>
+<arg>${params}</arg>
+<arg>${header}</arg>
+</arguments>
+<assign>
+<var>${responseTokenAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:20.937" level="INFO">Creating Session using : alias=APISession, url=https://login.microsoftonline.com/, headers={'Content-Type': 'application/x-www-form-urlencoded'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:20.936" endtime="20201018 19:01:20.937"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>data=${updatedata}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:21.518" level="INFO">POST Request : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ path_url=//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '224'} 
+ body=client_id=f8134a1b-0a12-4ee0-b91e-26fab8ce8080&amp;client_secret=***&amp;grant_type=password&amp;scope=user.read+mail.read+mail.send&amp;userName=Suchita%40automationwork.onmicrosoft.com&amp;password=Fsecure%40123 
+ </msg>
+<msg timestamp="20201018 19:01:21.519" level="INFO">POST Response : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ status=200, reason=OK 
+ body={"token_type":"Bearer","scope":"Mail.Read Mail.ReadWrite Mail.Send openid User.Read profile email","expires_in":3599,"ext_expires_in":3599,"access_token":"eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgxLCJuYmYiOjE2MDMwMzY1ODEsImV4cCI6MTYwMzA0MDQ4MSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhSQUFBQUh1VkJyNSs5K1lQUkRsZStlU0MvYjdzcHNobE1ubUdaU21xZFB2UDQvWnM9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJhcHBfd2ViIiwiYXBwaWQiOiJmODEzNGExYi0wYTEyLTRlZTAtYjkxZS0yNmZhYjhjZTgwODAiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkhvdHdhbmkiLCJnaXZlbl9uYW1lIjoiU3VjaGl0YSIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjkxLjE1Mi4xNzguMjAiLCJuYW1lIjoiU3VjaGl0YSIsIm9pZCI6ImQwZmNjZmMxLTRhMGUtNDkxYS1iY2MxLTI5NTM1ODUxMDA0NSIsInBsYXRmIjoiMTQiLCJwdWlkIjoiMTAwMzIwMDBFQjdBRDIyQyIsInJoIjoiMC5BQUFBaEE0a2JnamRTMHFwY0ZPZkRfaHAtUnRLRV9nU0N1Qk91UjRtLXJqT2dJQnpBTU0uIiwic2NwIjoiTWFpbC5SZWFkIE1haWwuUmVhZFdyaXRlIE1haWwuU2VuZCBvcGVuaWQgVXNlci5SZWFkIHByb2ZpbGUgZW1haWwiLCJzdWIiOiJGZGRkODk3aFVEOVloT1hVbWtvN2dPcVdTOVE5NUdtdE9CWVhFdW44Q1FnIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiNmUyNDBlODQtZGQwOC00YTRiLWE5NzAtNTM5ZjBmZjg2OWY5IiwidW5pcXVlX25hbWUiOiJTdWNoaXRhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6IlN1Y2hpdGFAYXV0b21hdGlvbndvcmsub25taWNyb3NvZnQuY29tIiwidXRpIjoiR25VWTN5VTVSRXU4TXBXaGx4RnlBQSIsInZlciI6IjEuMCIsIndpZHMiOlsiYjc5ZmJmNGQtM2VmOS00Njg5LTgxNDMtNzZiMTk0ZTg1NTA5Il0sInhtc19zdCI6eyJzdWIiOiJ6MlhRUEhXWVd2Mmt3Wk9WajUtMGJUdFM2Q3l3MDlDQmhMN09mdEhBWHhFIn0sInhtc190Y2R0IjoxNjAyMTQzNTQ5fQ.szzYexJnDnPrYfhn1l_nycoXOXmDOzM4gTyK1lZgPjm8CdQz_CvKshMIeEQFR71yj-4Nx-wkoP3cZbWmkWxU0LgWPzU3ZWrYwzfvLVzFGf5HCuwL_V9MBHIlC_NOLicpOr-6AAETqkfO2G9UQ9Dncb8jI5xZUyi7wqq0_-3F5jEtabXTqySmWezwoIv6zF8bpWwz_t1CtOimpZNGvcExMTJ4DulEa8WZ1S4BcZrFh_KW8nBYuQrt-BeX070U4S5vztIfCmNxmfdq9werDjJZT7aA7-utUD_elxwt-ZmO8FNiPmL7fTh2W0SswQd3InRWQZuI2rGVNoWQlwf-Fhs2kg"} 
+ </msg>
+<msg timestamp="20201018 19:01:21.519" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'login.microsoftonline.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:21.519" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:20.937" endtime="20201018 19:01:21.520"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' != '${EMPTY}'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE IF</arg>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' == '${EMPTY}'</arg>
+<arg>Set Variable</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:21.523" level="INFO">${python_dict} = {'token_type': 'Bearer', 'scope': 'Mail.Read Mail.ReadWrite Mail.Send openid User.Read profile email', 'expires_in': 3599, 'ext_expires_in': 3599, 'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlR...</msg>
+<status status="PASS" starttime="20201018 19:01:21.522" endtime="20201018 19:01:21.523"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:21.524" level="INFO">@{keys} = [ access_token | expires_in | ext_expires_in | scope | token_type ]</msg>
+<status status="PASS" starttime="20201018 19:01:21.523" endtime="20201018 19:01:21.524"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:21.524" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:21.524" endtime="20201018 19:01:21.524"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = access_token" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:21.525" endtime="20201018 19:01:21.525"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.525" endtime="20201018 19:01:21.525"></status>
+</kw>
+<kw name="${key} = expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:21.526" endtime="20201018 19:01:21.526"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.525" endtime="20201018 19:01:21.526"></status>
+</kw>
+<kw name="${key} = ext_expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:21.526" endtime="20201018 19:01:21.527"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.526" endtime="20201018 19:01:21.527"></status>
+</kw>
+<kw name="${key} = scope" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:21.528" endtime="20201018 19:01:21.531"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.527" endtime="20201018 19:01:21.531"></status>
+</kw>
+<kw name="${key} = token_type" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:21.531" endtime="20201018 19:01:21.532"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.531" endtime="20201018 19:01:21.532"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.524" endtime="20201018 19:01:21.532"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:21.522" endtime="20201018 19:01:21.532"></status>
+</kw>
+<msg timestamp="20201018 19:01:21.532" level="INFO">${robotDictionary} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:21.520" endtime="20201018 19:01:21.533"></status>
+</kw>
+<msg timestamp="20201018 19:01:21.533" level="INFO">${responseTokenAPI} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:20.936" endtime="20201018 19:01:21.533"></status>
+</kw>
+<msg timestamp="20201018 19:01:21.533" level="INFO">${access_token} = eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4z...</msg>
+<status status="PASS" starttime="20201018 19:01:20.931" endtime="20201018 19:01:21.533"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${access_token}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:21.534" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKS...</msg>
+<status status="PASS" starttime="20201018 19:01:21.533" endtime="20201018 19:01:21.534"></status>
+</kw>
+<kw name="Post API Request" library="common">
+<arguments>
+<arg>${graphURL}</arg>
+<arg>${sendMailAPI}</arg>
+<arg>${fileContents}</arg>
+<arg>${header}</arg>
+</arguments>
+<assign>
+<var>${responseSendMailAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:21.535" level="INFO">Creating Session using : alias=APISession, url=https://graph.microsoft.com/, headers={'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgxLCJuYmYiOjE2MDMwMzY1ODEsImV4cCI6MTYwMzA0MDQ4MSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhSQUFBQUh1VkJyNSs5K1lQUkRsZStlU0MvYjdzcHNobE1ubUdaU21xZFB2UDQvWnM9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJhcHBfd2ViIiwiYXBwaWQiOiJmODEzNGExYi0wYTEyLTRlZTAtYjkxZS0yNmZhYjhjZTgwODAiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkhvdHdhbmkiLCJnaXZlbl9uYW1lIjoiU3VjaGl0YSIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjkxLjE1Mi4xNzguMjAiLCJuYW1lIjoiU3VjaGl0YSIsIm9pZCI6ImQwZmNjZmMxLTRhMGUtNDkxYS1iY2MxLTI5NTM1ODUxMDA0NSIsInBsYXRmIjoiMTQiLCJwdWlkIjoiMTAwMzIwMDBFQjdBRDIyQyIsInJoIjoiMC5BQUFBaEE0a2JnamRTMHFwY0ZPZkRfaHAtUnRLRV9nU0N1Qk91UjRtLXJqT2dJQnpBTU0uIiwic2NwIjoiTWFpbC5SZWFkIE1haWwuUmVhZFdyaXRlIE1haWwuU2VuZCBvcGVuaWQgVXNlci5SZWFkIHByb2ZpbGUgZW1haWwiLCJzdWIiOiJGZGRkODk3aFVEOVloT1hVbWtvN2dPcVdTOVE5NUdtdE9CWVhFdW44Q1FnIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiNmUyNDBlODQtZGQwOC00YTRiLWE5NzAtNTM5ZjBmZjg2OWY5IiwidW5pcXVlX25hbWUiOiJTdWNoaXRhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6IlN1Y2hpdGFAYXV0b21hdGlvbndvcmsub25taWNyb3NvZnQuY29tIiwidXRpIjoiR25VWTN5VTVSRXU4TXBXaGx4RnlBQSIsInZlciI6IjEuMCIsIndpZHMiOlsiYjc5ZmJmNGQtM2VmOS00Njg5LTgxNDMtNzZiMTk0ZTg1NTA5Il0sInhtc19zdCI6eyJzdWIiOiJ6MlhRUEhXWVd2Mmt3Wk9WajUtMGJUdFM2Q3l3MDlDQmhMN09mdEhBWHhFIn0sInhtc190Y2R0IjoxNjAyMTQzNTQ5fQ.szzYexJnDnPrYfhn1l_nycoXOXmDOzM4gTyK1lZgPjm8CdQz_CvKshMIeEQFR71yj-4Nx-wkoP3cZbWmkWxU0LgWPzU3ZWrYwzfvLVzFGf5HCuwL_V9MBHIlC_NOLicpOr-6AAETqkfO2G9UQ9Dncb8jI5xZUyi7wqq0_-3F5jEtabXTqySmWezwoIv6zF8bpWwz_t1CtOimpZNGvcExMTJ4DulEa8WZ1S4BcZrFh_KW8nBYuQrt-BeX070U4S5vztIfCmNxmfdq9werDjJZT7aA7-utUD_elxwt-ZmO8FNiPmL7fTh2W0SswQd3InRWQZuI2rGVNoWQlwf-Fhs2kg'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:21.535" endtime="20201018 19:01:21.537"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>data=${updatedata}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.025" level="INFO">POST Request : url=https://graph.microsoft.com//v1.0/me/sendMail 
+ path_url=//v1.0/me/sendMail 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InVsbHlRVjBMZXMxZzFqQm9WanFDOXZZc2pwVlN0SW5Ub1lkZHYzN25MVlEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgxLCJuYmYiOjE2MDMwMzY1ODEsImV4cCI6MTYwMzA0MDQ4MSwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFTUUEyLzhSQUFBQUh1VkJyNSs5K1lQUkRsZStlU0MvYjdzcHNobE1ubUdaU21xZFB2UDQvWnM9IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJhcHBfd2ViIiwiYXBwaWQiOiJmODEzNGExYi0wYTEyLTRlZTAtYjkxZS0yNmZhYjhjZTgwODAiLCJhcHBpZGFjciI6IjEiLCJmYW1pbHlfbmFtZSI6IkhvdHdhbmkiLCJnaXZlbl9uYW1lIjoiU3VjaGl0YSIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjkxLjE1Mi4xNzguMjAiLCJuYW1lIjoiU3VjaGl0YSIsIm9pZCI6ImQwZmNjZmMxLTRhMGUtNDkxYS1iY2MxLTI5NTM1ODUxMDA0NSIsInBsYXRmIjoiMTQiLCJwdWlkIjoiMTAwMzIwMDBFQjdBRDIyQyIsInJoIjoiMC5BQUFBaEE0a2JnamRTMHFwY0ZPZkRfaHAtUnRLRV9nU0N1Qk91UjRtLXJqT2dJQnpBTU0uIiwic2NwIjoiTWFpbC5SZWFkIE1haWwuUmVhZFdyaXRlIE1haWwuU2VuZCBvcGVuaWQgVXNlci5SZWFkIHByb2ZpbGUgZW1haWwiLCJzdWIiOiJGZGRkODk3aFVEOVloT1hVbWtvN2dPcVdTOVE5NUdtdE9CWVhFdW44Q1FnIiwidGVuYW50X3JlZ2lvbl9zY29wZSI6IkVVIiwidGlkIjoiNmUyNDBlODQtZGQwOC00YTRiLWE5NzAtNTM5ZjBmZjg2OWY5IiwidW5pcXVlX25hbWUiOiJTdWNoaXRhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6IlN1Y2hpdGFAYXV0b21hdGlvbndvcmsub25taWNyb3NvZnQuY29tIiwidXRpIjoiR25VWTN5VTVSRXU4TXBXaGx4RnlBQSIsInZlciI6IjEuMCIsIndpZHMiOlsiYjc5ZmJmNGQtM2VmOS00Njg5LTgxNDMtNzZiMTk0ZTg1NTA5Il0sInhtc19zdCI6eyJzdWIiOiJ6MlhRUEhXWVd2Mmt3Wk9WajUtMGJUdFM2Q3l3MDlDQmhMN09mdEhBWHhFIn0sInhtc190Y2R0IjoxNjAyMTQzNTQ5fQ.szzYexJnDnPrYfhn1l_nycoXOXmDOzM4gTyK1lZgPjm8CdQz_CvKshMIeEQFR71yj-4Nx-wkoP3cZbWmkWxU0LgWPzU3ZWrYwzfvLVzFGf5HCuwL_V9MBHIlC_NOLicpOr-6AAETqkfO2G9UQ9Dncb8jI5xZUyi7wqq0_-3F5jEtabXTqySmWezwoIv6zF8bpWwz_t1CtOimpZNGvcExMTJ4DulEa8WZ1S4BcZrFh_KW8nBYuQrt-BeX070U4S5vztIfCmNxmfdq9werDjJZT7aA7-utUD_elxwt-ZmO8FNiPmL7fTh2W0SswQd3InRWQZuI2rGVNoWQlwf-Fhs2kg', 'Content-Length': '17760'} 
+ body=b'{"message": {"subject": "Test Message With Attachment", "body": {"contentType": "text", "content": "Please find attached files"}, "toRecipients": [{"emailAddress": {"address": "Maria@automationwork.onmicrosoft.com"}}], "attachments": [{"@odata.type": "#microsoft.graph.fileAttachment", "contentBytes": "SGF2ZSBhIE5pY2UgRGF5IQ==", "contentType": "text/plain", "name": "Test.txt", "contentLocation": "/Users/suchita.hotwani/Exercise/Fsecure_Test_Assignment/Resource/../TestData/Test.txt"}, {"@odata.type": "#microsoft.graph.fileAttachment", "contentBytes": "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'... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20201018 19:01:22.025" level="INFO">POST Response : url=https://graph.microsoft.com//v1.0/me/sendMail 
+ status=202, reason=Accepted 
+ body=None 
+ </msg>
+<msg timestamp="20201018 19:01:22.025" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'graph.microsoft.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:22.025" level="INFO">${response} = &lt;Response [202]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:21.537" endtime="20201018 19:01:22.025"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' != '${EMPTY}'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE IF</arg>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' == '${EMPTY}'</arg>
+<arg>Set Variable</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.026" endtime="20201018 19:01:22.027"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.027" level="INFO">${robotDictionary} = </msg>
+<status status="PASS" starttime="20201018 19:01:22.026" endtime="20201018 19:01:22.027"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.027" level="INFO">${responseSendMailAPI} = </msg>
+<status status="PASS" starttime="20201018 19:01:21.534" endtime="20201018 19:01:22.027"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.930" endtime="20201018 19:01:22.027"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:20.911" endtime="20201018 19:01:22.027" critical="yes"></status>
+</test>
+<test id="s1-t4" name="TC:4 Verify From Recipient Mailbox That Email Body And Attachment Matches">
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${CLIENT_SECRET}</arg>
+</arguments>
+<assign>
+<var>${clientSecret}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.029" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:22.029" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:22.028" endtime="20201018 19:01:22.029"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.029" level="INFO">${clientSecret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:22.028" endtime="20201018 19:01:22.030"></status>
+</kw>
+<kw name="Decode Encrypted Text" library="sendEmail">
+<arguments>
+<arg>${RECEIVER_PASSWORD}</arg>
+</arguments>
+<assign>
+<var>${receiverPassword}</var>
+</assign>
+<kw name="Get Decrypted Text" library="CryptoLibrary">
+<doc>Decrypts cipher text and returns the plain text.</doc>
+<arguments>
+<arg>${encryptedText}</arg>
+</arguments>
+<assign>
+<var>${Secret}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.030" level="INFO">Decrypting text and return value.</msg>
+<msg timestamp="20201018 19:01:22.030" level="INFO">${Secret} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:22.030" endtime="20201018 19:01:22.031"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.031" level="INFO">${receiverPassword} = ***</msg>
+<status status="PASS" starttime="20201018 19:01:22.030" endtime="20201018 19:01:22.031"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>client_id=${CLIENT_ID}</arg>
+<arg>client_secret=${clientSecret}</arg>
+<arg>grant_type=password</arg>
+<arg>scope=user.read mail.read mail.send</arg>
+<arg>userName=${RECEIVER_EMAIL_ADDRESS}</arg>
+<arg>password=${receiverPassword}</arg>
+</arguments>
+<assign>
+<var>${paramsTokenAPI}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.032" level="INFO">${paramsTokenAPI} = {'client_id': 'f8134a1b-0a12-4ee0-b91e-26fab8ce8080', 'client_secret': '***', 'grant_type': 'password', 'scope': 'user.read mail.read mail.send', 'userName': 'Maria@auto...</msg>
+<status status="PASS" starttime="20201018 19:01:22.031" endtime="20201018 19:01:22.032"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>$filter=from/emailAddress/address eq '${SENDER_EMAIL_ADDRESS}' and isRead eq false</arg>
+<arg>$count=true</arg>
+</arguments>
+<assign>
+<var>${paramsReadMailAPI}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.032" level="INFO">${paramsReadMailAPI} = {'$filter': "from/emailAddress/address eq 'Suchita@automationwork.onmicrosoft.com' and isRead eq false", '$count': 'true'}</msg>
+<status status="PASS" starttime="20201018 19:01:22.032" endtime="20201018 19:01:22.032"></status>
+</kw>
+<kw name="Get Access Token" library="common">
+<arguments>
+<arg>${BASE_URL}</arg>
+<arg>${TOKEN_API}</arg>
+<arg>${paramsTokenAPI}</arg>
+</arguments>
+<assign>
+<var>${access_token}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/x-www-form-urlencoded</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.033" level="INFO">${header} = {'Content-Type': 'application/x-www-form-urlencoded'}</msg>
+<status status="PASS" starttime="20201018 19:01:22.033" endtime="20201018 19:01:22.033"></status>
+</kw>
+<kw name="Post API Request" library="common">
+<arguments>
+<arg>${url}</arg>
+<arg>${tokenAPI}</arg>
+<arg>${params}</arg>
+<arg>${header}</arg>
+</arguments>
+<assign>
+<var>${responseTokenAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:22.034" level="INFO">Creating Session using : alias=APISession, url=https://login.microsoftonline.com/, headers={'Content-Type': 'application/x-www-form-urlencoded'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:22.034" endtime="20201018 19:01:22.034"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>data=${updatedata}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.652" level="INFO">POST Request : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ path_url=//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/x-www-form-urlencoded', 'Content-Length': '222'} 
+ body=client_id=f8134a1b-0a12-4ee0-b91e-26fab8ce8080&amp;client_secret=***&amp;grant_type=password&amp;scope=user.read+mail.read+mail.send&amp;userName=Maria%40automationwork.onmicrosoft.com&amp;password=Fsecure%40123 
+ </msg>
+<msg timestamp="20201018 19:01:22.653" level="INFO">POST Response : url=https://login.microsoftonline.com//automationwork.onmicrosoft.com/oauth2/v2.0/token 
+ status=200, reason=OK 
+ body={"token_type":"Bearer","scope":"Mail.Read Mail.ReadWrite Mail.Send User.Read profile openid email","expires_in":3599,"ext_expires_in":3599,"access_token":"eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgyLCJuYmYiOjE2MDMwMzY1ODIsImV4cCI6MTYwMzA0MDQ4MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZSmpzYXplZjY0enB0Wmh1b1FPaWZaTnNOWDV3dUlTdDcxNllmdGkyZkRuUGl0VUEiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiS2FwcGkiLCJnaXZlbl9uYW1lIjoiTWFyaWEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI5MS4xNTIuMTc4LjIwIiwibmFtZSI6Ik1hcmlhIiwib2lkIjoiMDhkMWYyZDAtMDg3Ni00NGU0LThjZWYtOTI3ZDA0MDYxOWI4IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0I3NDMzIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFIMC4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIFVzZXIuUmVhZCBwcm9maWxlIG9wZW5pZCBlbWFpbCIsInN1YiI6ImZKOXZ2M3JMdmQ4M2hDLU54dUlLcUFoWEhEV245R0hESXhQTGd1WnVmcmMiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6IjFDeGNnOGdZajBPOTN2SXdXRDVzQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfc3QiOnsic3ViIjoiRlNxWm9YYXdzTVBKZWlmeXl4Ynd4TUlNbTBWLVFLVVRkVGpOTTh6b1l3OCJ9LCJ4bXNfdGNkdCI6MTYwMjE0MzU0OX0.SiwqijMq2PFM4OIQLKOHunpld9-HZ9WcnXeO_XSOwDX39xYhhk8aGKlkKsv4E-S6JGKft7izmFvHIIFv-gaYSQQZPLvTKgdDBjI6Ji5hSJfcQlEwBvf1dKAq99StGY-I_PaCDsXZkYTDlvp6SdvCEYYFalLqnGuvYB0_L5_OKESec0X1uJLPH61Y7l_MtDUMnKUEY5meOMvugnXasVNZwZ4L-AqCkOlFdH-oY0n2rr_CAdJDHdG1a2qMZj-mCxmyLXEzagS9Y_nFLJ4cgT73Jp97zDiGknQj0fDruL1D9DSZpYZhuQdhRfARcXef3F_5OQZfaTKH3JU6HzpWFkGd4w"} 
+ </msg>
+<msg timestamp="20201018 19:01:22.653" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'login.microsoftonline.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:22.653" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:22.034" endtime="20201018 19:01:22.653"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' != '${EMPTY}'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE IF</arg>
+<arg>'${response.status_code}' in ['200', '202'] and '${response.content}' == '${EMPTY}'</arg>
+<arg>Set Variable</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.655" level="INFO">${python_dict} = {'token_type': 'Bearer', 'scope': 'Mail.Read Mail.ReadWrite Mail.Send User.Read profile openid email', 'expires_in': 3599, 'ext_expires_in': 3599, 'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2...</msg>
+<status status="PASS" starttime="20201018 19:01:22.655" endtime="20201018 19:01:22.656"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.656" level="INFO">@{keys} = [ access_token | expires_in | ext_expires_in | scope | token_type ]</msg>
+<status status="PASS" starttime="20201018 19:01:22.656" endtime="20201018 19:01:22.656"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.656" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:22.656" endtime="20201018 19:01:22.656"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = access_token" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.657" endtime="20201018 19:01:22.657"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.657" endtime="20201018 19:01:22.657"></status>
+</kw>
+<kw name="${key} = expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.657" endtime="20201018 19:01:22.658"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.657" endtime="20201018 19:01:22.658"></status>
+</kw>
+<kw name="${key} = ext_expires_in" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.658" endtime="20201018 19:01:22.658"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.658" endtime="20201018 19:01:22.659"></status>
+</kw>
+<kw name="${key} = scope" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.659" endtime="20201018 19:01:22.659"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.659" endtime="20201018 19:01:22.659"></status>
+</kw>
+<kw name="${key} = token_type" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.659" endtime="20201018 19:01:22.660"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.659" endtime="20201018 19:01:22.660"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.656" endtime="20201018 19:01:22.660"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.654" endtime="20201018 19:01:22.660"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.660" level="INFO">${robotDictionary} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:22.653" endtime="20201018 19:01:22.661"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.663" level="INFO">${responseTokenAPI} = {'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUak...</msg>
+<status status="PASS" starttime="20201018 19:01:22.033" endtime="20201018 19:01:22.663"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.664" level="INFO">${access_token} = eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4z...</msg>
+<status status="PASS" starttime="20201018 19:01:22.033" endtime="20201018 19:01:22.664"></status>
+</kw>
+<kw name="Read Email From MailBox" library="sendEmail">
+<arguments>
+<arg>${GRAPH_BASE_URL}</arg>
+<arg>${READ_MAIL_API}</arg>
+<arg>${paramsReadMailAPI}</arg>
+<arg>${access_token}</arg>
+</arguments>
+<assign>
+<var>${responseReadMailAPI}</var>
+</assign>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${access_token}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.666" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKS...</msg>
+<status status="PASS" starttime="20201018 19:01:22.665" endtime="20201018 19:01:22.666"></status>
+</kw>
+<kw name="Get API Request" library="common">
+<arguments>
+<arg>${graphURL}</arg>
+<arg>${readMailAPI}</arg>
+<arg>${header}</arg>
+<arg>${paramsReadMailAPI}</arg>
+</arguments>
+<assign>
+<var>${responseReadMailAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:22.667" level="INFO">Creating Session using : alias=APISession, url=https://graph.microsoft.com/, headers={'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgyLCJuYmYiOjE2MDMwMzY1ODIsImV4cCI6MTYwMzA0MDQ4MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZSmpzYXplZjY0enB0Wmh1b1FPaWZaTnNOWDV3dUlTdDcxNllmdGkyZkRuUGl0VUEiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiS2FwcGkiLCJnaXZlbl9uYW1lIjoiTWFyaWEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI5MS4xNTIuMTc4LjIwIiwibmFtZSI6Ik1hcmlhIiwib2lkIjoiMDhkMWYyZDAtMDg3Ni00NGU0LThjZWYtOTI3ZDA0MDYxOWI4IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0I3NDMzIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFIMC4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIFVzZXIuUmVhZCBwcm9maWxlIG9wZW5pZCBlbWFpbCIsInN1YiI6ImZKOXZ2M3JMdmQ4M2hDLU54dUlLcUFoWEhEV245R0hESXhQTGd1WnVmcmMiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6IjFDeGNnOGdZajBPOTN2SXdXRDVzQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfc3QiOnsic3ViIjoiRlNxWm9YYXdzTVBKZWlmeXl4Ynd4TUlNbTBWLVFLVVRkVGpOTTh6b1l3OCJ9LCJ4bXNfdGNkdCI6MTYwMjE0MzU0OX0.SiwqijMq2PFM4OIQLKOHunpld9-HZ9WcnXeO_XSOwDX39xYhhk8aGKlkKsv4E-S6JGKft7izmFvHIIFv-gaYSQQZPLvTKgdDBjI6Ji5hSJfcQlEwBvf1dKAq99StGY-I_PaCDsXZkYTDlvp6SdvCEYYFalLqnGuvYB0_L5_OKESec0X1uJLPH61Y7l_MtDUMnKUEY5meOMvugnXasVNZwZ4L-AqCkOlFdH-oY0n2rr_CAdJDHdG1a2qMZj-mCxmyLXEzagS9Y_nFLJ4cgT73Jp97zDiGknQj0fDruL1D9DSZpYZhuQdhRfARcXef3F_5OQZfaTKH3JU6HzpWFkGd4w'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:22.667" endtime="20201018 19:01:22.668"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>params=${params}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.958" level="INFO">GET Request : url=https://graph.microsoft.com//v1.0/me/mailFolders/Inbox/messages?%24filter=from%2FemailAddress%2Faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;%24count=true 
+ path_url=//v1.0/me/mailFolders/Inbox/messages?%24filter=from%2FemailAddress%2Faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;%24count=true 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgyLCJuYmYiOjE2MDMwMzY1ODIsImV4cCI6MTYwMzA0MDQ4MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZSmpzYXplZjY0enB0Wmh1b1FPaWZaTnNOWDV3dUlTdDcxNllmdGkyZkRuUGl0VUEiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiS2FwcGkiLCJnaXZlbl9uYW1lIjoiTWFyaWEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI5MS4xNTIuMTc4LjIwIiwibmFtZSI6Ik1hcmlhIiwib2lkIjoiMDhkMWYyZDAtMDg3Ni00NGU0LThjZWYtOTI3ZDA0MDYxOWI4IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0I3NDMzIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFIMC4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIFVzZXIuUmVhZCBwcm9maWxlIG9wZW5pZCBlbWFpbCIsInN1YiI6ImZKOXZ2M3JMdmQ4M2hDLU54dUlLcUFoWEhEV245R0hESXhQTGd1WnVmcmMiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6IjFDeGNnOGdZajBPOTN2SXdXRDVzQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfc3QiOnsic3ViIjoiRlNxWm9YYXdzTVBKZWlmeXl4Ynd4TUlNbTBWLVFLVVRkVGpOTTh6b1l3OCJ9LCJ4bXNfdGNkdCI6MTYwMjE0MzU0OX0.SiwqijMq2PFM4OIQLKOHunpld9-HZ9WcnXeO_XSOwDX39xYhhk8aGKlkKsv4E-S6JGKft7izmFvHIIFv-gaYSQQZPLvTKgdDBjI6Ji5hSJfcQlEwBvf1dKAq99StGY-I_PaCDsXZkYTDlvp6SdvCEYYFalLqnGuvYB0_L5_OKESec0X1uJLPH61Y7l_MtDUMnKUEY5meOMvugnXasVNZwZ4L-AqCkOlFdH-oY0n2rr_CAdJDHdG1a2qMZj-mCxmyLXEzagS9Y_nFLJ4cgT73Jp97zDiGknQj0fDruL1D9DSZpYZhuQdhRfARcXef3F_5OQZfaTKH3JU6HzpWFkGd4w'} 
+ body=None 
+ </msg>
+<msg timestamp="20201018 19:01:22.958" level="INFO">GET Response : url=https://graph.microsoft.com//v1.0/me/mailFolders/Inbox/messages?%24filter=from%2FemailAddress%2Faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;%24count=true 
+ status=200, reason=OK 
+ body={"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages","@odata.count":-1,"@odata.nextLink":"https://graph.microsoft.com/v1.0/me/mailFolders/Inbox/messages?$filter=from%2femailAddress%2faddress+eq+%27Suchita%40automationwork.onmicrosoft.com%27+and+isRead+eq+false&amp;$count=true&amp;$skip=10","value":[{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG1\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq3AAA=","createdDateTime":"2020-10-18T15:47:59Z","lastModifiedDateTime":"2020-10-18T15:48:01Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG1","categories":[],"receivedDateTime":"2020-10-18T15:47:59Z","sentDateTime":"2020-10-18T15:47:59Z","hasAttachments":false,"internetMessageId":"&lt;AM8P195MB0946D6833EC1D38F3017470A81010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message Without Attachment","bodyPreview":"Hi, Here is Test URL embedded","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAGkOsMABqnNAsND9si_ZI5c=","conversationIndex":"AQHWpWYNaQ6wwAGqc0Cw0P2yL5kjlw==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq3AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"html","content":"&lt;html&gt;&lt;head&gt;\r\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"&gt;&lt;meta content=\"text/html; charset=us-ascii\"&gt;&lt;/head&gt;&lt;body&gt;Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG3\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA=","createdDateTime":"2020-10-18T15:48:01Z","lastModifiedDateTime":"2020-10-18T15:48:02Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG3","categories":[],"receivedDateTime":"2020-10-18T15:48:01Z","sentDateTime":"2020-10-18T15:48:00Z","hasAttachments":true,"internetMessageId":"&lt;AM8P195MB09467169396F05C750AD3F4181010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message With Attachment","bodyPreview":"Please find attached files","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAIf3bPHIEr5LoubA9g_Dw_g=","conversationIndex":"AQHWpWYOh/ds8cgSvkui5sD2D4PD6A==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"text","content":"Please find attached files"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHS\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq5AAA=","createdDateTime":"2020-10-18T15:50:53Z","lastModifiedDateTime":"2020-10-18T15:50:54Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHS","categories":[],"receivedDateTime":"2020-10-18T15:50:54Z","sentDateTime":"2020-10-18T15:50:52Z","hasAttachments":false,"internetMessageId":"&lt;AM8P195MB09461CD341BA6529ACD3341881010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message Without Attachment","bodyPreview":"Hi, Here is Test URL embedded","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAOcYqO3bxMJIpLW1FAXVrXI=","conversationIndex":"AQHWpWZ15xio7dvEwkiktbUUBdWtcg==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq5AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"html","content":"&lt;html&gt;&lt;head&gt;\r\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"&gt;&lt;meta content=\"text/html; charset=us-ascii\"&gt;&lt;/head&gt;&lt;body&gt;Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHX\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq6AAA=","createdDateTime":"2020-10-18T15:50:54Z","lastModifiedDateTime":"2020-10-18T15:50:55Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHX","categories":[],"receivedDateTime":"2020-10-18T15:50:54Z","sentDateTime":"2020-10-18T15:50:54Z","hasAttachments":true,"internetMessageId":"&lt;AM8P195MB09461F51C7217711013CE8C581010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message With Attachment","bodyPreview":"Please find attached files","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQANdcAFhhBblNoxX2KwpcOXY=","conversationIndex":"AQHWpWZ211wAWGEFuU2jFfYrClw5dg==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq6AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"text","content":"Please find attached files"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients":[],"bccRecipients":[],"replyTo":[],"flag":{"flagStatus":"notFlagged"}},{"@odata.etag":"W/\"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHk\"","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq7AAA=","createdDateTime":"2020-10-18T15:51:18Z","lastModifiedDateTime":"2020-10-18T15:51:20Z","changeKey":"CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CHk","categories":[],"receivedDateTime":"2020-10-18T15:51:19Z","sentDateTime":"2020-10-18T15:51:18Z","hasAttachments":false,"internetMessageId":"&lt;AM8P195MB0946417E68A2D2E6D6FF241181010@AM8P195MB0946.EURP195.PROD.OUTLOOK.COM&gt;","subject":"Test Message Without Attachment","bodyPreview":"Hi, Here is Test URL embedded","importance":"normal","parentFolderId":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAuAAAAAAA0BcxviXRZT4Tm8u5wIG8SAQAVz3HRYHegQ74amgijTnEDAAAAAAEMAAA=","conversationId":"AAQkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgAQAHtUOX4t5TNBhaNnxqwzabM=","conversationIndex":"AQHWpWaEe1Q5fi3lM0GFo2fGrDNpsw==","isDeliveryReceiptRequested":false,"isReadReceiptRequested":false,"isRead":false,"isDraft":false,"webLink":"https://outlook.office365.com/owa/?ItemID=AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq7AAA%3D&amp;exvsurl=1&amp;viewmodel=ReadMessageItem","inferenceClassification":"focused","body":{"contentType":"html","content":"&lt;html&gt;&lt;head&gt;\r\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"&gt;&lt;meta content=\"text/html; charset=us-ascii\"&gt;&lt;/head&gt;&lt;body&gt;Hi, Here is &lt;a href=\"https://robotframework.org/\"&gt;Test URL embedded &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;"},"sender":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"from":{"emailAddress":{"name":"Suchita","address":"Suchita@automationwork.onmicrosoft.com"}},"toRecipients":[{"emailAddress":{"name":"Maria","address":"Maria@automationwork.onmicrosoft.com"}}],"ccRecipients... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20201018 19:01:22.958" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'graph.microsoft.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:22.958" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:22.668" endtime="20201018 19:01:22.958"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' == '200'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.961" level="INFO">${python_dict} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': -1, '@odata.nextLink': 'https://graph.micro...</msg>
+<status status="PASS" starttime="20201018 19:01:22.959" endtime="20201018 19:01:22.961"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.961" level="INFO">@{keys} = [ @odata.context | @odata.count | @odata.nextLink | value ]</msg>
+<status status="PASS" starttime="20201018 19:01:22.961" endtime="20201018 19:01:22.961"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.961" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:22.961" endtime="20201018 19:01:22.961"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = @odata.context" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.962" endtime="20201018 19:01:22.962"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.962" endtime="20201018 19:01:22.962"></status>
+</kw>
+<kw name="${key} = @odata.count" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.962" endtime="20201018 19:01:22.963"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.962" endtime="20201018 19:01:22.963"></status>
+</kw>
+<kw name="${key} = @odata.nextLink" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.963" endtime="20201018 19:01:22.963"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.963" endtime="20201018 19:01:22.963"></status>
+</kw>
+<kw name="${key} = value" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.963" endtime="20201018 19:01:22.964"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.963" endtime="20201018 19:01:22.964"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.961" endtime="20201018 19:01:22.964"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.959" endtime="20201018 19:01:22.964"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.964" level="INFO">${robotDictionary} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': -1, '@odata.nextLink': 'https://graph.micro...</msg>
+<status status="PASS" starttime="20201018 19:01:22.959" endtime="20201018 19:01:22.965"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.965" level="INFO">${responseReadMailAPI} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': -1, '@odata.nextLink': 'https://graph.micro...</msg>
+<status status="PASS" starttime="20201018 19:01:22.666" endtime="20201018 19:01:22.965"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.965" level="INFO">${responseReadMailAPI} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/mailFolders('Inbox')/messages", '@odata.count': -1, '@odata.nextLink': 'https://graph.micro...</msg>
+<status status="PASS" starttime="20201018 19:01:22.664" endtime="20201018 19:01:22.965"></status>
+</kw>
+<kw name="Verify Email Body And Attachment Are Same As Sent Message" library="sendEmail">
+<arguments>
+<arg>${responseReadMailAPI.value}</arg>
+<arg>${MESSAGE_WITH_ATTACHMENT}</arg>
+<arg>${access_token}</arg>
+</arguments>
+<kw name="${mail} IN [ @{mails} ]" type="for">
+<kw name="${mail} = {'@odata.etag': 'W/&quot;CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG1&quot;', 'id': 'AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ..." type="foritem">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Compare Mail Body And Subject Values</arg>
+<arg>${sentMessage}</arg>
+<arg>${mail}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Compare Mail Body And Subject Values" library="common">
+<arguments>
+<arg>${sentMessage}</arg>
+<arg>${mail}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentMessage}[message][subject]</arg>
+<arg>${mail}[subject]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<msg timestamp="20201018 19:01:22.967" level="FAIL">Saved value are not equal.: Test Message With Attachment != Test Message Without Attachment</msg>
+<status status="FAIL" starttime="20201018 19:01:22.967" endtime="20201018 19:01:22.967"></status>
+</kw>
+<status status="FAIL" starttime="20201018 19:01:22.966" endtime="20201018 19:01:22.967"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.967" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20201018 19:01:22.966" endtime="20201018 19:01:22.967"></status>
+</kw>
+<kw name="Continue For Loop If" library="BuiltIn">
+<doc>Skips the current for loop iteration if the ``condition`` is true.</doc>
+<arguments>
+<arg>'${found}' =='${FALSE}'</arg>
+</arguments>
+<msg timestamp="20201018 19:01:22.968" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" starttime="20201018 19:01:22.967" endtime="20201018 19:01:22.968"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.966" endtime="20201018 19:01:22.968"></status>
+</kw>
+<kw name="${mail} = {'@odata.etag': 'W/&quot;CQAAABYAAAAVz3HRYHegQ74amgijTnEDAAAF8CG3&quot;', 'id': 'AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ..." type="foritem">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Compare Mail Body And Subject Values</arg>
+<arg>${sentMessage}</arg>
+<arg>${mail}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Compare Mail Body And Subject Values" library="common">
+<arguments>
+<arg>${sentMessage}</arg>
+<arg>${mail}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentMessage}[message][subject]</arg>
+<arg>${mail}[subject]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.969" endtime="20201018 19:01:22.969"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentMessage}[message][body][contentType]</arg>
+<arg>${mail}[body][contentType]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.969" endtime="20201018 19:01:22.972"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${mail}[body][content]</arg>
+<arg>${sentMessage}[message][body][content]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.973" endtime="20201018 19:01:22.974"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.968" endtime="20201018 19:01:22.974"></status>
+</kw>
+<msg timestamp="20201018 19:01:22.974" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:22.968" endtime="20201018 19:01:22.974"></status>
+</kw>
+<kw name="Continue For Loop If" library="BuiltIn">
+<doc>Skips the current for loop iteration if the ``condition`` is true.</doc>
+<arguments>
+<arg>'${found}' =='${FALSE}'</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:22.974" endtime="20201018 19:01:22.974"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${mail}[hasAttachments]' == '${True}'</arg>
+<arg>Get Attachments From Mail</arg>
+<arg>${mail}[id]</arg>
+<arg>${sentMessage}</arg>
+<arg>${access_token}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${False}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Get Attachments From Mail" library="sendEmail">
+<arguments>
+<arg>${mail}[id]</arg>
+<arg>${sentMessage}</arg>
+<arg>${access_token}</arg>
+</arguments>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${access_token}</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.976" level="INFO">${header} = {'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKS...</msg>
+<status status="PASS" starttime="20201018 19:01:22.975" endtime="20201018 19:01:22.976"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>$count=true</arg>
+</arguments>
+<assign>
+<var>${params}</var>
+</assign>
+<msg timestamp="20201018 19:01:22.976" level="INFO">${params} = {'$count': 'true'}</msg>
+<status status="PASS" starttime="20201018 19:01:22.976" endtime="20201018 19:01:22.976"></status>
+</kw>
+<kw name="Get API Request" library="common">
+<arguments>
+<arg>${GRAPH_BASE_URL}</arg>
+<arg>v1.0/me/messages/${mailid}/attachments</arg>
+<arg>${header}</arg>
+<arg>${params}</arg>
+</arguments>
+<assign>
+<var>${getAttachmentAPI}</var>
+</assign>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>url=${url}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:22.977" level="INFO">Creating Session using : alias=APISession, url=https://graph.microsoft.com/, headers={'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgyLCJuYmYiOjE2MDMwMzY1ODIsImV4cCI6MTYwMzA0MDQ4MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZSmpzYXplZjY0enB0Wmh1b1FPaWZaTnNOWDV3dUlTdDcxNllmdGkyZkRuUGl0VUEiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiS2FwcGkiLCJnaXZlbl9uYW1lIjoiTWFyaWEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI5MS4xNTIuMTc4LjIwIiwibmFtZSI6Ik1hcmlhIiwib2lkIjoiMDhkMWYyZDAtMDg3Ni00NGU0LThjZWYtOTI3ZDA0MDYxOWI4IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0I3NDMzIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFIMC4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIFVzZXIuUmVhZCBwcm9maWxlIG9wZW5pZCBlbWFpbCIsInN1YiI6ImZKOXZ2M3JMdmQ4M2hDLU54dUlLcUFoWEhEV245R0hESXhQTGd1WnVmcmMiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6IjFDeGNnOGdZajBPOTN2SXdXRDVzQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfc3QiOnsic3ViIjoiRlNxWm9YYXdzTVBKZWlmeXl4Ynd4TUlNbTBWLVFLVVRkVGpOTTh6b1l3OCJ9LCJ4bXNfdGNkdCI6MTYwMjE0MzU0OX0.SiwqijMq2PFM4OIQLKOHunpld9-HZ9WcnXeO_XSOwDX39xYhhk8aGKlkKsv4E-S6JGKft7izmFvHIIFv-gaYSQQZPLvTKgdDBjI6Ji5hSJfcQlEwBvf1dKAq99StGY-I_PaCDsXZkYTDlvp6SdvCEYYFalLqnGuvYB0_L5_OKESec0X1uJLPH61Y7l_MtDUMnKUEY5meOMvugnXasVNZwZ4L-AqCkOlFdH-oY0n2rr_CAdJDHdG1a2qMZj-mCxmyLXEzagS9Y_nFLJ4cgT73Jp97zDiGknQj0fDruL1D9DSZpYZhuQdhRfARcXef3F_5OQZfaTKH3JU6HzpWFkGd4w'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20201018 19:01:22.976" endtime="20201018 19:01:22.977"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>APISession</arg>
+<arg>${session_url}</arg>
+<arg>params=${params}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20201018 19:01:23.174" level="INFO">GET Request : url=https://graph.microsoft.com//v1.0/me/messages/AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA=/attachments?%24count=true 
+ path_url=//v1.0/me/messages/AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA=/attachments?%24count=true 
+ headers={'User-Agent': 'python-requests/2.24.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRyZmp2dVowNUlJNEc3M196R0JmTXNvM3RiUjdUTWl1VVJ2ZmFfYVhPQVEiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCIsImtpZCI6ImtnMkxZczJUMENUaklmajRydDZKSXluZW4zOCJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC82ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkvIiwiaWF0IjoxNjAzMDM2NTgyLCJuYmYiOjE2MDMwMzY1ODIsImV4cCI6MTYwMzA0MDQ4MiwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkUyUmdZSmpzYXplZjY0enB0Wmh1b1FPaWZaTnNOWDV3dUlTdDcxNllmdGkyZkRuUGl0VUEiLCJhbXIiOlsicHdkIl0sImFwcF9kaXNwbGF5bmFtZSI6ImFwcF93ZWIiLCJhcHBpZCI6ImY4MTM0YTFiLTBhMTItNGVlMC1iOTFlLTI2ZmFiOGNlODA4MCIsImFwcGlkYWNyIjoiMSIsImZhbWlseV9uYW1lIjoiS2FwcGkiLCJnaXZlbl9uYW1lIjoiTWFyaWEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI5MS4xNTIuMTc4LjIwIiwibmFtZSI6Ik1hcmlhIiwib2lkIjoiMDhkMWYyZDAtMDg3Ni00NGU0LThjZWYtOTI3ZDA0MDYxOWI4IiwicGxhdGYiOiIxNCIsInB1aWQiOiIxMDAzMjAwMEVCN0I3NDMzIiwicmgiOiIwLkFBQUFoQTRrYmdqZFMwcXBjRk9mRF9ocC1SdEtFX2dTQ3VCT3VSNG0tcmpPZ0lCekFIMC4iLCJzY3AiOiJNYWlsLlJlYWQgTWFpbC5SZWFkV3JpdGUgTWFpbC5TZW5kIFVzZXIuUmVhZCBwcm9maWxlIG9wZW5pZCBlbWFpbCIsInN1YiI6ImZKOXZ2M3JMdmQ4M2hDLU54dUlLcUFoWEhEV245R0hESXhQTGd1WnVmcmMiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiRVUiLCJ0aWQiOiI2ZTI0MGU4NC1kZDA4LTRhNGItYTk3MC01MzlmMGZmODY5ZjkiLCJ1bmlxdWVfbmFtZSI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInVwbiI6Ik1hcmlhQGF1dG9tYXRpb253b3JrLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6IjFDeGNnOGdZajBPOTN2SXdXRDVzQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfc3QiOnsic3ViIjoiRlNxWm9YYXdzTVBKZWlmeXl4Ynd4TUlNbTBWLVFLVVRkVGpOTTh6b1l3OCJ9LCJ4bXNfdGNkdCI6MTYwMjE0MzU0OX0.SiwqijMq2PFM4OIQLKOHunpld9-HZ9WcnXeO_XSOwDX39xYhhk8aGKlkKsv4E-S6JGKft7izmFvHIIFv-gaYSQQZPLvTKgdDBjI6Ji5hSJfcQlEwBvf1dKAq99StGY-I_PaCDsXZkYTDlvp6SdvCEYYFalLqnGuvYB0_L5_OKESec0X1uJLPH61Y7l_MtDUMnKUEY5meOMvugnXasVNZwZ4L-AqCkOlFdH-oY0n2rr_CAdJDHdG1a2qMZj-mCxmyLXEzagS9Y_nFLJ4cgT73Jp97zDiGknQj0fDruL1D9DSZpYZhuQdhRfARcXef3F_5OQZfaTKH3JU6HzpWFkGd4w'} 
+ body=None 
+ </msg>
+<msg timestamp="20201018 19:01:23.174" level="INFO">GET Response : url=https://graph.microsoft.com//v1.0/me/messages/AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA=/attachments?%24count=true 
+ status=200, reason=OK 
+ body={"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/messages('AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAA%3D')/attachments","@odata.count":2,"value":[{"@odata.type":"#microsoft.graph.fileAttachment","@odata.mediaContentType":"text/plain","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAABEgAQAF91ydqEe5hBu7EgMrLX9lQ=","lastModifiedDateTime":"2020-10-18T15:48:00Z","name":"Test.txt","contentType":"text/plain","size":352,"isInline":false,"contentId":null,"contentLocation":"/Users/suchita.hotwani/personal/API/Resource/../TestData/Test.txt","contentBytes":"SGF2ZSBhIE5pY2UgRGF5IQ=="},{"@odata.type":"#microsoft.graph.fileAttachment","@odata.mediaContentType":"image/jpeg","id":"AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAAF9Jq4AAABEgAQAADtZO5tgR1Hssha4xwR7xQ=","lastModifiedDateTime":"2020-10-18T15:48:00Z","name":"Cats.jpeg","contentType":"image/jpeg","size":13136,"isInline":false,"contentId":null,"contentLocation":"/Users/suchita.hotwani/personal/API/Resource/../TestData/Cats.jpeg","contentBytes":"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... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20201018 19:01:23.175" level="INFO">/opt/anaconda3/lib/python3.8/site-packages/urllib3/connectionpool.py:979: InsecureRequestWarning: Unverified HTTPS request is being made to host 'graph.microsoft.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20201018 19:01:23.175" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201018 19:01:22.977" endtime="20201018 19:01:23.175"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${response.status_code}' == '200'</arg>
+<arg>Convert Json To Robot Dictionary</arg>
+<arg>${response.content}</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Error In ${session_url} API</arg>
+<arg>Request</arg>
+</arguments>
+<assign>
+<var>${robotDictionary}</var>
+</assign>
+<kw name="Convert Json To Robot Dictionary" library="common">
+<doc>Converts Python dictionary to Robot dictionary.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>json.loads(r'''${json}''')</arg>
+<arg>json</arg>
+</arguments>
+<assign>
+<var>${python_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:23.177" level="INFO">${python_dict} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/messages('AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wI...</msg>
+<status status="PASS" starttime="20201018 19:01:23.176" endtime="20201018 19:01:23.177"></status>
+</kw>
+<kw name="Get Dictionary Keys" library="Collections">
+<doc>Returns keys of the given ``dictionary`` as a list.</doc>
+<arguments>
+<arg>${python_dict}</arg>
+</arguments>
+<assign>
+<var>@{keys}</var>
+</assign>
+<msg timestamp="20201018 19:01:23.178" level="INFO">@{keys} = [ @odata.context | @odata.count | value ]</msg>
+<status status="PASS" starttime="20201018 19:01:23.177" endtime="20201018 19:01:23.178"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<assign>
+<var>${robot_dict}</var>
+</assign>
+<msg timestamp="20201018 19:01:23.178" level="INFO">${robot_dict} = {}</msg>
+<status status="PASS" starttime="20201018 19:01:23.178" endtime="20201018 19:01:23.178"></status>
+</kw>
+<kw name="${key} IN [ @{keys} ]" type="for">
+<kw name="${key} = @odata.context" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.178" endtime="20201018 19:01:23.179"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.178" endtime="20201018 19:01:23.179"></status>
+</kw>
+<kw name="${key} = @odata.count" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.179" endtime="20201018 19:01:23.179"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.179" endtime="20201018 19:01:23.179"></status>
+</kw>
+<kw name="${key} = value" type="foritem">
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${robot_dict}</arg>
+<arg>${key}=${python_dict}[${key}]</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.180" endtime="20201018 19:01:23.180"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.180" endtime="20201018 19:01:23.180"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.178" endtime="20201018 19:01:23.180"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.176" endtime="20201018 19:01:23.180"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.180" level="INFO">${robotDictionary} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/messages('AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wI...</msg>
+<status status="PASS" starttime="20201018 19:01:23.175" endtime="20201018 19:01:23.180"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.181" level="INFO">${getAttachmentAPI} = {'@odata.context': "https://graph.microsoft.com/v1.0/$metadata#users('08d1f2d0-0876-44e4-8cef-927d040619b8')/messages('AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wI...</msg>
+<status status="PASS" starttime="20201018 19:01:22.976" endtime="20201018 19:01:23.181"></status>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<arguments>
+<arg>${sentMessage}[message][attachments]</arg>
+</arguments>
+<assign>
+<var>${attachments_count}</var>
+</assign>
+<msg timestamp="20201018 19:01:23.181" level="INFO">Length is 2</msg>
+<msg timestamp="20201018 19:01:23.181" level="INFO">${attachments_count} = 2</msg>
+<status status="PASS" starttime="20201018 19:01:23.181" endtime="20201018 19:01:23.181"></status>
+</kw>
+<kw name="Run Keyword And Return If" library="BuiltIn">
+<doc>Runs the specified keyword and returns from the enclosing user keyword.</doc>
+<arguments>
+<arg>'${getAttachmentAPI}[@odata.count]' != '${attachments_count}'</arg>
+<arg>Set Variable</arg>
+<arg>${FALSE}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<msg timestamp="20201018 19:01:23.182" level="INFO">${found} = None</msg>
+<status status="PASS" starttime="20201018 19:01:23.181" endtime="20201018 19:01:23.182"></status>
+</kw>
+<kw name="${attachment} IN [ @{getAttachmentAPI.value} ]" type="for">
+<kw name="${attachment} = {'@odata.type': '#microsoft.graph.fileAttachment', '@odata.mediaContentType': 'text/plain', 'id': 'AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74am..." type="foritem">
+<kw name="Verify Attachment With Sent Attachments" library="sendEmail">
+<arguments>
+<arg>${attachment}</arg>
+<arg>${sentMessage}[message][attachments]</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="${sentAttachment} IN [ @{sentAttachments} ]" type="for">
+<kw name="${sentAttachment} = {'@odata.type': '#microsoft.graph.fileAttachment', 'contentBytes': 'SGF2ZSBhIE5pY2UgRGF5IQ==', 'contentType': 'text/plain', 'name': 'Test.txt', 'contentLocation': '/Users/suchita.hotwani/Exercise/Fsec..." type="foritem">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Compare Email Attachment Values</arg>
+<arg>${attachment}</arg>
+<arg>${sentAttachment}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Compare Email Attachment Values" library="common">
+<arguments>
+<arg>${attachment}</arg>
+<arg>${sentAttachment}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[name]</arg>
+<arg>${attachment}[name]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.183" endtime="20201018 19:01:23.184"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[contentType]</arg>
+<arg>${attachment}[contentType]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.184" endtime="20201018 19:01:23.184"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[contentBytes]</arg>
+<arg>${attachment}[contentBytes]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.184" endtime="20201018 19:01:23.185"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.183" endtime="20201018 19:01:23.185"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.185" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:23.183" endtime="20201018 19:01:23.185"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>${found}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:23.185" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20201018 19:01:23.185" endtime="20201018 19:01:23.185"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.183" endtime="20201018 19:01:23.185"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.183" endtime="20201018 19:01:23.185"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.186" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:23.182" endtime="20201018 19:01:23.186"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>'${found}' =='${FALSE}'</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.186" endtime="20201018 19:01:23.186"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.182" endtime="20201018 19:01:23.186"></status>
+</kw>
+<kw name="${attachment} = {'@odata.type': '#microsoft.graph.fileAttachment', '@odata.mediaContentType': 'image/jpeg', 'id': 'AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74am..." type="foritem">
+<kw name="Verify Attachment With Sent Attachments" library="sendEmail">
+<arguments>
+<arg>${attachment}</arg>
+<arg>${sentMessage}[message][attachments]</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="${sentAttachment} IN [ @{sentAttachments} ]" type="for">
+<kw name="${sentAttachment} = {'@odata.type': '#microsoft.graph.fileAttachment', 'contentBytes': 'SGF2ZSBhIE5pY2UgRGF5IQ==', 'contentType': 'text/plain', 'name': 'Test.txt', 'contentLocation': '/Users/suchita.hotwani/Exercise/Fsec..." type="foritem">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Compare Email Attachment Values</arg>
+<arg>${attachment}</arg>
+<arg>${sentAttachment}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Compare Email Attachment Values" library="common">
+<arguments>
+<arg>${attachment}</arg>
+<arg>${sentAttachment}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[name]</arg>
+<arg>${attachment}[name]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<msg timestamp="20201018 19:01:23.188" level="FAIL">Saved value are not equal.: Test.txt != Cats.jpeg</msg>
+<status status="FAIL" starttime="20201018 19:01:23.188" endtime="20201018 19:01:23.189"></status>
+</kw>
+<status status="FAIL" starttime="20201018 19:01:23.187" endtime="20201018 19:01:23.190"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.191" level="INFO">${found} = False</msg>
+<status status="PASS" starttime="20201018 19:01:23.187" endtime="20201018 19:01:23.191"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>${found}</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.191" endtime="20201018 19:01:23.192"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.187" endtime="20201018 19:01:23.192"></status>
+</kw>
+<kw name="${sentAttachment} = {'@odata.type': '#microsoft.graph.fileAttachment', 'contentBytes': '/9j/4AAQSkZJRgABAQAAZABkAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAA..." type="foritem">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Compare Email Attachment Values</arg>
+<arg>${attachment}</arg>
+<arg>${sentAttachment}</arg>
+</arguments>
+<assign>
+<var>${found}</var>
+</assign>
+<kw name="Compare Email Attachment Values" library="common">
+<arguments>
+<arg>${attachment}</arg>
+<arg>${sentAttachment}</arg>
+</arguments>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[name]</arg>
+<arg>${attachment}[name]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.194" endtime="20201018 19:01:23.194"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[contentType]</arg>
+<arg>${attachment}[contentType]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.194" endtime="20201018 19:01:23.194"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${sentAttachment}[contentBytes]</arg>
+<arg>${attachment}[contentBytes]</arg>
+<arg>Saved value are not equal.</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.194" endtime="20201018 19:01:23.195"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.193" endtime="20201018 19:01:23.195"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.195" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:23.192" endtime="20201018 19:01:23.195"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>${found}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:23.195" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20201018 19:01:23.195" endtime="20201018 19:01:23.195"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.192" endtime="20201018 19:01:23.195"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.187" endtime="20201018 19:01:23.195"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.196" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:23.186" endtime="20201018 19:01:23.196"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>'${found}' =='${FALSE}'</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.196" endtime="20201018 19:01:23.196"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.186" endtime="20201018 19:01:23.196"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:23.182" endtime="20201018 19:01:23.196"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.975" endtime="20201018 19:01:23.196"></status>
+</kw>
+<msg timestamp="20201018 19:01:23.196" level="INFO">${found} = True</msg>
+<status status="PASS" starttime="20201018 19:01:22.975" endtime="20201018 19:01:23.196"></status>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<doc>Stops executing the enclosing for loop if the ``condition`` is true.</doc>
+<arguments>
+<arg>${found}</arg>
+</arguments>
+<msg timestamp="20201018 19:01:23.197" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20201018 19:01:23.196" endtime="20201018 19:01:23.197"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.968" endtime="20201018 19:01:23.197"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.966" endtime="20201018 19:01:23.197"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${found}' == '${FALSE}'</arg>
+<arg>Fail</arg>
+<arg>Email not found</arg>
+</arguments>
+<status status="PASS" starttime="20201018 19:01:23.197" endtime="20201018 19:01:23.197"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.966" endtime="20201018 19:01:23.197"></status>
+</kw>
+<status status="PASS" starttime="20201018 19:01:22.028" endtime="20201018 19:01:23.197" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20201018 19:01:14.269" endtime="20201018 19:01:23.199"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0">Critical Tests</stat>
+<stat pass="4" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" id="s1" name="sendEmailTestSuite">sendEmailTestSuite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,0 +1,38 @@
+CLIENT_ID: f8134a1b-0a12-4ee0-b91e-26fab8ce8080
+CLIENT_SECRET:  crypt:MFPOb35EVdvedTWVQ9d/5HIWqE3tmPPhPTbH9VmKT0oqG197KVRjFqh+aSFq7orCcVV7vO74/l9BZ2byQddXgDI0He5arenuGixaLYq+X3tyKg==
+SENDER_EMAIL_ADDRESS: Suchita@automationwork.onmicrosoft.com
+SENDER_PASSWORD: crypt:aDBSSOAva82RuQ0g1lxi05vCUal6LQwdbxsBsirk2BhpyE6UyqeW+DT04syzESJ4sk6vAVZWSDAWHB8=
+RECEIVER_EMAIL_ADDRESS: Maria@automationwork.onmicrosoft.com
+RECEIVER_PASSWORD: crypt:aDBSSOAva82RuQ0g1lxi05vCUal6LQwdbxsBsirk2BhpyE6UyqeW+DT04syzESJ4sk6vAVZWSDAWHB8=
+URL: xyz.com/user=${userId}
+MESSAGE_WITHOUT_ATTACHMENT:
+  message:
+    subject:  Test Message Without Attachment
+    body:
+      contentType: html
+      content: Hi, Here is <a href="https://robotframework.org/">Test URL embedded </a>
+    toRecipients:
+    - emailAddress:
+        address: ${receiverEmail}
+MESSAGE_WITH_ATTACHMENT:
+  message:
+    subject:  Test Message With Attachment
+    body:
+      contentType: text
+      content: Please find attached files
+    toRecipients:
+    - emailAddress:
+        address: Maria@automationwork.onmicrosoft.com
+    attachments:
+    - "@odata.type": "#microsoft.graph.fileAttachment"
+      contentBytes: ${content}
+      contentType: text/plain
+      name: Test.txt
+      contentLocation: "${TestSuiteLocation}/../TestData/Test.txt"
+    - "@odata.type": "#microsoft.graph.fileAttachment"
+      contentBytes: ${content}
+      contentType: image/jpeg
+      name: Cats.jpeg
+      contentLocation: "${TestSuiteLocation}/../TestData/Cats.jpeg"
+
+
