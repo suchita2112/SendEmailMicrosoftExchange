@@ -11,7 +11,6 @@ ${TOKEN_API}                           automationwork.onmicrosoft.com/oauth2/v2.
 ${GRAPH_BASE_URL}                      https://graph.microsoft.com/
 ${SEND_MAIL_API}                       v1.0/me/sendMail
 ${READ_MAIL_API}                       v1.0/me/mailFolders/Inbox/messages
-${READ_ATTACHMENT_API}                 v1.0/me/messages/AAMkADhkMTRhOTkwLTc1YTMtNGJjNS1hODgwLTZkYmUyMDUxZmY3NgBGAAAAAAA0BcxviXRZT4Tm8u5wIG8SBwAVz3HRYHegQ74amgijTnEDAAAAAAEMAAAVz3HRYHegQ74amgijTnEDAAACdTKrAAA=/attachments
 
 *** Test Cases ***
 
